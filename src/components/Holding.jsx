@@ -8,6 +8,8 @@ export default function Holding() {
         <Container>
             {state && state.map( t => <CardTicker ticker={t} /> )}
             {/* <button onClick={()=>console.log(state)}>state</button> */}
+            ---------------------------------------------------------
+            {state && state.map( t => <CardTicker ticker={t} /> )}
         </Container>
     );
 };
@@ -15,4 +17,5 @@ export default function Holding() {
 const Container = styled.div`
     display: flex;
     flex-direction: column;
+    min-width: 50vw;
 `;

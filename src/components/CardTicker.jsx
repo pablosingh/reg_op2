@@ -7,6 +7,7 @@ export default function CardTicker(props) {
             <Sector><label>Fecha Inicial</label> {date}</Sector>
             <Sector><label>Ticker </label>{ticker}</Sector>
             <Sector><label>Cantidad </label>{amount}</Sector>
+            <Sector><label>Total </label></Sector>
             <Sector><label>Promedio </label>{price}</Sector>
             <Sector><label>Precio Actual</label></Sector>
             <Sector><label>Ganancias </label></Sector>

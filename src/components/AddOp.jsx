@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { addOperation } from '../redux/operations/actions'
+import { average } from "../redux/holdings/actions";
 
 export default function AddOp () {
     const initialData = {
@@ -9,6 +10,7 @@ export default function AddOp () {
         ticker: "",
         amount: "",
         price: "",
+        total: "",
         buy: "",
     }
     const [ data, setData ] = useState(initialData);
@@ -17,13 +19,17 @@ export default function AddOp () {
     const changing = e => {
         setData({
             ...data,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
         });
     };
     const sending = e => {
         // console.log(data);
-        dispatch(addOperation(data));
+        dispatch(addOperation({
+            ...data,
+            total: data.amount*data.price,
+        }));
         setData(initialData);
+        dispatch(average());
     };
     return(
         <div>
