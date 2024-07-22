@@ -1,15 +1,16 @@
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import CardTicker from "./CardTicker";
+import CardHolding from "./CardHolding";
 
 export default function Holding() {
-    const state = useSelector( state => state?.operations.operations );
+    const ops = useSelector( state => state?.operations.operations );
+    const hol = useSelector( state => state?.holdings.holdings );
     return (
         <Container>
-            {state && state.map( t => <CardTicker ticker={t} /> )}
-            {/* <button onClick={()=>console.log(state)}>state</button> */}
+            {ops && ops.map( t => <CardTicker ticker={t} /> )}
             ---------------------------------------------------------
-            {state && state.map( t => <CardTicker ticker={t} /> )}
+            {hol && hol.map( t => <CardHolding ticker={t} /> )}
         </Container>
     );
 };

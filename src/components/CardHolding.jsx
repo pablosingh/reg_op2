@@ -1,15 +1,17 @@
 import styled from "styled-components";
 
-export default function CardTicker(props) {
-    const { date, ticker, amount, price, total, buy } = props.ticker;
+export default function CardHolding(props) {
+    const { date, ticker, amount, price, total } = props.ticker;
     return (
         <Container>
-            <Sector><label>Fecha</label> {date}</Sector>
+            <Sector><label>Fecha Inicial</label> {date}</Sector>
             <Sector><label>Ticker </label>{ticker}</Sector>
             <Sector><label>Cantidad </label>{amount}</Sector>
-            <Sector><label>Precio </label>{price}</Sector>
+            <Sector><label>Precio Promedio </label>{price}</Sector>
             <Sector><label>Total </label>{total}</Sector>
-            <Sector><label>Estado</label>{buy}</Sector>
+
+            <Sector><label>Precio Actual</label></Sector>
+            <Sector><label>Ganancias </label></Sector>
         </Container>
     );
 };

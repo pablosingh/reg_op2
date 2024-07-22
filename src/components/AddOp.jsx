@@ -24,12 +24,15 @@ export default function AddOp () {
     };
     const sending = e => {
         // console.log(data);
-        dispatch(addOperation({
+        const toSend = {
             ...data,
-            total: data.amount*data.price,
-        }));
+            amount: Number.parseFloat(data.amount),
+            price: Number.parseFloat(data.price),
+            total: Number.parseFloat(data.amount)*Number.parseFloat(data.price),
+        };
+        dispatch(addOperation(toSend));
+        dispatch(average(toSend));
         setData(initialData);
-        dispatch(average());
     };
     return(
         <div>
