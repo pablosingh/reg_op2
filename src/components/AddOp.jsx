@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { addOperation } from '../redux/operations/actions'
+import { addOperation, addOperationToDB } from '../redux/operations/actions'
 import { average } from "../redux/holdings/actions";
 
 export default function AddOp () {
@@ -12,6 +12,8 @@ export default function AddOp () {
         price: "",
         total: "",
         buy: "",
+        exchange: "",
+        comment: "",
     }
     const [ data, setData ] = useState(initialData);
     const dispatch = useDispatch();
@@ -30,7 +32,8 @@ export default function AddOp () {
             price: Number.parseFloat(data.price),
             total: Number.parseFloat(data.amount)*Number.parseFloat(data.price),
         };
-        dispatch(addOperation(toSend));
+        // dispatch(addOperation(toSend));
+        dispatch(addOperationToDB(toSend));
         dispatch(average(toSend));
         setData(initialData);
     };
@@ -54,6 +57,14 @@ export default function AddOp () {
             <br/>
             <label>Compra o Venta</label>
             <input type="text" name="buy" value={data.buy}
+                className="" onChange={changing}/>
+            <br/>
+            <label>Exchange</label>
+            <input type="text" name="exchange" value={data.exchange}
+                className="" onChange={changing}/>
+            <br/>
+            <label>Comentarios</label>
+            <input type="text" name="comment" value={data.comment}
                 className="" onChange={changing}/>
             <br/>
             <Btn onClick={sending}>Agregar</Btn>

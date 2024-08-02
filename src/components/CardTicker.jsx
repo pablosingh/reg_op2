@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export default function CardTicker(props) {
-    const { date, ticker, amount, price, total, buy } = props.ticker;
+    const { date, ticker, amount, price, total, buy, exchange, comment } = props.ticker;
     return (
         <Container>
             <Sector><label>Fecha</label> {date}</Sector>
@@ -10,6 +10,8 @@ export default function CardTicker(props) {
             <Sector><label>Precio </label>{price}</Sector>
             <Sector><label>Total </label>{total}</Sector>
             <Sector><label>Estado</label>{buy}</Sector>
+            <Sector><label>Exchange</label>{exchange}</Sector>
+            <Sector><label>Comentarios</label>{comment}</Sector>
         </Container>
     );
 };
