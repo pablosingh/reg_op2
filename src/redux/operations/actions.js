@@ -34,8 +34,6 @@ export const test = (op) => {
 
 export const addOperationToDB = (op) => {
     return async function (dispatch) {
-        console.log(op);
-        console.log(JSON.stringify(op));
         try {
             await fetch(`http://localhost:3001/operations`, {
                 method: 'POST',

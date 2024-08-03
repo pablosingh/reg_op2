@@ -16,6 +16,7 @@ export default function AddOp () {
         comment: "",
     }
     const [ data, setData ] = useState(initialData);
+    // const [ buy,  ]
     const dispatch = useDispatch();
     const state = useSelector( state => state );
     const changing = e => {
@@ -24,6 +25,9 @@ export default function AddOp () {
             [e.target.name]: e.target.value,
         });
     };
+    // const handleBuy = e => {
+
+    // };
     const sending = e => {
         // console.log(data);
         const toSend = {
@@ -55,10 +59,19 @@ export default function AddOp () {
             <input type="text" name="price" value={data.price}
                 className="" onChange={changing}/>
             <br/>
+
+
             <label>Compra o Venta</label>
             <input type="text" name="buy" value={data.buy}
                 className="" onChange={changing}/>
+            
+            {/* <input type="radio" name="buy" value={true}
+                className="" onChange={handleBuy}/>
+            <input type="radio" name="buy" value={false}
+                className="" onChange={handleBuy}/> */}
             <br/>
+
+
             <label>Exchange</label>
             <input type="text" name="exchange" value={data.exchange}
                 className="" onChange={changing}/>
