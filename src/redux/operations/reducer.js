@@ -1,4 +1,4 @@
-import { ADD_OP } from './actions';
+import { ADD_OP, LOAD_OP_FROM_DB } from './actions';
 
 const initialState = {
     operations: [],
@@ -10,6 +10,11 @@ const operations = ( state = initialState, action ) => {
             return {
                 ...state,
                 operations: [...state.operations, action.payload],
+            };
+        case LOAD_OP_FROM_DB:
+            return {
+                ...state,
+                operations: [...state.operations, ...action.payload]
             };
         default: return state;
     };

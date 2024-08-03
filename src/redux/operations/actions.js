@@ -1,6 +1,7 @@
 export const ADD_OP = 'ADD_OP';
 export const DELETE_OP = 'DELETE_OP';
 export const TEST = 'TEST';
+export const LOAD_OP_FROM_DB = 'LOAD_OP_FROM_DB';
 
 export const addOperation = (op) => {
     return {
@@ -54,3 +55,18 @@ export const addOperationToDB = (op) => {
         }
     }; 
 };
+
+export const loadOperationsFromDB = () => {
+    return async function(dispatch){
+        try {
+            await fetch(`http://localhost:3001/operations`)
+                .then( js => js.json() )
+                // .then( res => console.log(res) )
+                .then( ops => dispatch( { type: LOAD_OP_FROM_DB, payload: ops } ))
+                .catch( e => console.error(e));
+        } catch (error) {
+            console.error(error);
+        }
+    };
+};
+

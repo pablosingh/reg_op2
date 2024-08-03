@@ -11,34 +11,37 @@ export default function AddOp () {
         amount: "",
         price: "",
         total: "",
-        buy: "",
+        buy: true,
         exchange: "",
         comment: "",
     }
     const [ data, setData ] = useState(initialData);
-    // const [ buy,  ]
+    const [ buy, setBuy ] = useState(true);
     const dispatch = useDispatch();
     const state = useSelector( state => state );
     const changing = e => {
         setData({
             ...data,
+            buy,
             [e.target.name]: e.target.value,
         });
     };
-    // const handleBuy = e => {
-
-    // };
+    const handleBuy = e => {
+        setBuy(e.target.value);
+    };
     const sending = e => {
         // console.log(data);
         const toSend = {
             ...data,
+            buy,
             amount: Number.parseFloat(data.amount),
             price: Number.parseFloat(data.price),
             total: Number.parseFloat(data.amount)*Number.parseFloat(data.price),
         };
         // dispatch(addOperation(toSend));
         dispatch(addOperationToDB(toSend));
-        dispatch(average(toSend));
+        // dispatch(average(toSend));
+        // console.log(toSend);
         setData(initialData);
     };
     return(
@@ -59,19 +62,15 @@ export default function AddOp () {
             <input type="text" name="price" value={data.price}
                 className="" onChange={changing}/>
             <br/>
-
-
-            <label>Compra o Venta</label>
-            <input type="text" name="buy" value={data.buy}
-                className="" onChange={changing}/>
-            
-            {/* <input type="radio" name="buy" value={true}
-                className="" onChange={handleBuy}/>
-            <input type="radio" name="buy" value={false}
-                className="" onChange={handleBuy}/> */}
+            <label>Compra 
+                <input type="radio" name="buy" value={true} defaultChecked={true}
+                    className="" onChange={handleBuy}/>
+            </label>
+            <label>Venta 
+                <input type="radio" name="buy" value={false}
+                    className="" onChange={handleBuy}/>
+            </label>
             <br/>
-
-
             <label>Exchange</label>
             <input type="text" name="exchange" value={data.exchange}
                 className="" onChange={changing}/>

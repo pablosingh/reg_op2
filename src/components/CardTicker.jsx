@@ -2,9 +2,15 @@ import styled from "styled-components";
 
 export default function CardTicker(props) {
     const { date, ticker, amount, price, total, buy, exchange, comment } = props.ticker;
+    const dateTicker = new Date(date);
+    const formattedDate = dateTicker.toLocaleDateString('es-ES', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+    });
     return (
         <Container>
-            <Sector><label>Fecha</label> {date}</Sector>
+            <Sector><label>Fecha</label> {formattedDate}</Sector>
             <Sector><label>Ticker </label>{ticker}</Sector>
             <Sector><label>Cantidad </label>{amount}</Sector>
             <Sector><label>Precio </label>{price}</Sector>
