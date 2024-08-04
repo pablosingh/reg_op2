@@ -1,4 +1,5 @@
 export const AVERAGE = 'AVERAGE';
+export const LOAD_HOLD_FROM_DB = 'LOAD_HOLD_FROM_DB';
 
 export const average = (op) => {
     return {
@@ -26,5 +27,21 @@ export function actualPrice () {
             console.error(e);
         };
     };  
+};
+
+export function loadHoldingsFromDB () {
+    return async function (dispatch) {
+        try {
+            await fetch(`http://localhost:3001/holdings`)
+                .then( js => js.json() )
+                .then( arrayHoldings => {
+                    dispatch({ type: LOAD_HOLD_FROM_DB, payload: arrayHoldings });
+                    // console.log(arrayHoldings);
+                } )
+                .catch( err => console.error(err) );
+        } catch (error) {
+            console.error(error);
+        }
+    };
 };
 

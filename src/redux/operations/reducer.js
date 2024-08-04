@@ -9,12 +9,12 @@ const operations = ( state = initialState, action ) => {
         case ADD_OP:
             return {
                 ...state,
-                operations: [...state.operations, action.payload],
+                operations: [...state.operations, ...action.payload],
             };
         case LOAD_OP_FROM_DB:
             return {
                 ...state,
-                operations: [...state.operations, ...action.payload]
+                operations: [...action.payload]
             };
         default: return state;
     };

@@ -1,4 +1,4 @@
-import { AVERAGE } from './actions';
+import { AVERAGE, LOAD_HOLD_FROM_DB } from './actions';
 const initialState = {
     holdings: [],
 };
@@ -6,6 +6,11 @@ const initialState = {
 
 export const holdings = ( state = initialState, action ) => {
     switch( action.type ){
+        case LOAD_HOLD_FROM_DB: 
+            return {
+                ...state,
+                holdings: [...action.payload]
+            };
         case AVERAGE:
             const operation = state?.holdings.find( f => f.ticker==action.payload.ticker );
             if ( operation ){
