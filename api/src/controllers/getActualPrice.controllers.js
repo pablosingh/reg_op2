@@ -82,3 +82,19 @@ export const test = async (req, res) => {
     const nDate = await difDate();
     res.json({differece: nDate});
 };
+
+export const getActualPriceDB = async (req, res) => {
+    const { cripto } = req.params;
+    try {
+        const foundCripto = await Cripto.findOne({
+            where: {
+                cripto: cripto.toUpperCase(),
+            },
+            order: [['update', 'DESC']]
+        });
+        res.json(foundCripto);
+    } catch (error) {
+        console.error(error);
+        res.json({ msg: error });
+    };
+};

@@ -30,7 +30,7 @@ export const holdings = ( state = initialState, action ) => {
             }else
                 return {
                     ...state,
-                    holdings: [...state.holdings, action.payload ],
+                    holdings: [...action.payload ],
                 };
         default: return state;
     };

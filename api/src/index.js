@@ -6,6 +6,7 @@ import { getdifDate } from './controllers/getActualPrice.controllers.js';
 // import Holding from './models/Holding.js';
 // import Operation from './models/Operation.js';
 // import Cripto from './models/Cripto.js';
+// import User from './models/User.js';
 
 // async function connectionTest(){
 //     try {
@@ -27,6 +28,5 @@ sequelize.sync({ force: false })
             const difference = await getdifDate();
             if( difference>=1 ) 
                 initialCriptoLoadingCMC();
-            // console.log( await initialCriptoLoadingCMC());
         });
     })

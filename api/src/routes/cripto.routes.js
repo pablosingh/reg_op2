@@ -4,11 +4,12 @@ import {
     getCripto,
     getCriptos,
  } from '../controllers/cripto.controllers.js';
-import { test, getdifDate } from "../controllers/getActualPrice.controllers.js";
+import { getActualPriceDB, test, getdifDate } from "../controllers/getActualPrice.controllers.js";
 const router = Router();
 
 router.get('/criptos', getCriptos );
 router.get('/cripto/:cripto', getCripto);
+router.get('/dayprice/:cripto', getActualPriceDB);
 router.post('/cripto', addCripto );
 
 // router.get('/test', getdifDate);

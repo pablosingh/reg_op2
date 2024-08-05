@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export default function CardHolding(props) {
-    const { date, ticker, amount, price, total } = props.ticker;
+    const { date, ticker, amount, price, total, actualPrice, profits } = props.ticker;
     const dateTicker = new Date(date);
     const formattedDate = dateTicker.toLocaleDateString('es-ES', {
         year: 'numeric',
@@ -13,11 +13,11 @@ export default function CardHolding(props) {
             <Sector><label>Fecha Inicial</label> {formattedDate}</Sector>
             <Sector><label>Ticker </label>{ticker}</Sector>
             <Sector><label>Cantidad </label>{amount}</Sector>
-            <Sector><label>Precio Promedio </label>{price}</Sector>
-            <Sector><label>Total </label>{total}</Sector>
+            <Sector><label>Precio Promedio </label>{price.toFixed(2)}</Sector>
+            <Sector><label>Total </label>{total.toFixed(2)}</Sector>
 
-            <Sector><label>Precio Actual</label></Sector>
-            <Sector><label>Ganancias </label></Sector>
+            <Sector><label>Precio Actual</label>{actualPrice.toFixed(2)}</Sector>
+            <Sector><label>Ganancias </label>{profits.toFixed(2)}</Sector>
         </Container>
     );
 };

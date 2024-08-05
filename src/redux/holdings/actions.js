@@ -31,13 +31,35 @@ export function actualPrice () {
 
 export function loadHoldingsFromDB () {
     return async function (dispatch) {
+        var holdingsToSend = [];
+        var promesas = [];
+        var subPromesas = [];
         try {
             await fetch(`http://localhost:3001/holdings`)
                 .then( js => js.json() )
-                .then( arrayHoldings => {
-                    dispatch({ type: LOAD_HOLD_FROM_DB, payload: arrayHoldings });
-                    // console.log(arrayHoldings);
-                } )
+                .then( holdingsResDB => {
+                    holdingsToSend = [...holdingsResDB];
+                    holdingsToSend.forEach( hold => {
+                        promesas.push(fetch(`http://localhost:3001/dayprice/${hold.ticker}`))
+                    })
+                })
+                .then( () => {
+                    Promise.all(promesas)
+                        .then( values => values.forEach( v => subPromesas.push( v.json() ) ) )
+                        .then( () => {
+                            Promise.all(subPromesas)
+                                .then( subValues => {
+                                    subValues.forEach( (sub, i) => {
+                                        if(sub){
+                                            holdingsToSend[i].actualPrice = sub.price;
+                                            holdingsToSend[i].profits = holdingsToSend[i].actualPrice-holdingsToSend[i].price;
+                                        }
+                                    });
+                                })
+                                // .then( () => console.log(holdingsToSend) ) 
+                                .then( () => dispatch({ type: LOAD_HOLD_FROM_DB, payload: holdingsToSend }))
+                        } )
+                })
                 .catch( err => console.error(err) );
         } catch (error) {
             console.error(error);
