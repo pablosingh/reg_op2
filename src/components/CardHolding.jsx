@@ -4,9 +4,9 @@ export default function CardHolding(props) {
     const { date, ticker, amount, price, total, actualPrice, profits } = props.ticker;
     const dateTicker = new Date(date);
     const formattedDate = dateTicker.toLocaleDateString('es-ES', {
-        year: 'numeric',
+        day: '2-digit',
         month: '2-digit',
-        day: '2-digit'
+        year: 'numeric',
     });
     return (
         <Container>

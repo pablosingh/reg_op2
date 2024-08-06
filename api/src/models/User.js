@@ -22,29 +22,15 @@ const User = sequelize.define('User', {
             type: DataTypes.STRING
         },
     },
-    // {
-    //   timestamps: false
-    // }
+    {
+      timestamps: false
+    }
 );
 
-User.hasMany(Operation, {
-    foreinkey: "userId",
-    sourceKey: "id"
-  });
-  
-Operation.belongsTo(User, { 
-    foreinkey: "userId", 
-    targetId: "id" 
-});
+// User.hasMany(Operation, { foreinkey: "userId" });
+// Operation.belongsTo(User, { foreignKey: 'userId' });
 
-User.hasMany(Holding, {
-    foreinkey: "userId",
-    sourceKey: "id"
-  });
-  
-Holding.belongsTo(User, { 
-    foreinkey: "userId", 
-    targetId: "id" 
-});
+// User.hasMany(Holding, { foreinkey: "userId" });
+// Holding.belongsTo(User, { foreignKey: 'userId'});
 
 export default User;

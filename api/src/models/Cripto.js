@@ -17,9 +17,9 @@ const Cripto = sequelize.define('Cripto', {
             type: DataTypes.DATE
         }
     },
-    // {
-    //     timestamps: false
-    // }
+    {
+        timestamps: false
+    }
 );
 
 export default Cripto;

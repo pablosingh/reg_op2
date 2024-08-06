@@ -1,20 +1,28 @@
 import Operation from "../models/Operation.js";
 
 export const createOperation = async (req, res) => {
-    console.log(req.body);
-    const { date, ticker, amount, price, total, buy, exchange, comment } = req.body;
-    
+    // console.log(req.body);
+    const { date, ticker, amount, price, total, buy, exchange, comment, UserId } = req.body;
+    // console.log("-------------------");
+    const dateTicker = new Date();
+    const formattedDate = dateTicker.toLocaleDateString('es-ES', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+    });
     try {
         const toCreate = { 
             amount: Number.parseFloat(amount),
             buy,
             comment, 
-            date: new Date(),
+            date: formattedDate,
             exchange, 
             price: Number.parseFloat(price), 
             ticker: ticker.toUpperCase(), 
-            total: Number.parseFloat(total), 
+            total: Number.parseFloat(total),
+            UserId: Number.parseInt(UserId),
         };
+        // console.log(toCreate);
         const newOperation = await Operation.create(toCreate);
         res.json(newOperation);
     } catch (error) {
