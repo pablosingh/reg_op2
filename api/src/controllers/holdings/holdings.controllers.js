@@ -1,8 +1,11 @@
 import Holding from "../../models/Holding.js";
+import User from "../../models/User.js";
 
 export const getHoldings = async (req, res) => {
     try {
-        const foundHoldings = await Holding.findAll({});
+        const foundHoldings = await Holding.findAll({
+            include: User
+        });
         res.json(foundHoldings);
     } catch (error) {
         res.json({msg: error});
@@ -10,44 +13,26 @@ export const getHoldings = async (req, res) => {
 };
 
 export const createHolding = async (req, res) => {
-    let created = {};
-    const { date, ticker, amount, price, total, buy, exchange, comment } = req.body;
+    const { date, ticker, amount, price, total, comment, UserId } = req.body;
+    const dateTicker = new Date();
+    const formattedDate = dateTicker.toLocaleDateString('es-ES', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+    });
     const toCreate = { 
-        amount: Number.parseFloat(amount),
-        // buy,
-        comment, 
-        date: new Date(),
-        // exchange,
-        price: Number.parseFloat(price), 
+        date: formattedDate,
         ticker: ticker.toUpperCase(), 
+        amount: Number.parseFloat(amount),
+        price: Number.parseFloat(price), 
         total: Number.parseFloat(total), 
+        comment,
+        UserId,
     };
     try {
-        const foundHolding = await Holding.findOne({
-            where: {
-                ticker
-            }
-        });
-        if (!foundHolding){
-            created = await Holding.create(toCreate);
-            // console.log(created);
-            res.json(created);
-        }else{
-            if(buy){
-                foundHolding.amount += toCreate.amount;
-                foundHolding.total += toCreate.total;
-                foundHolding.price = foundHolding.total/foundHolding.amount;
-                await foundHolding.save();
-            }else{
-                foundHolding.amount -= toCreate.amount;
-                foundHolding.total = toCreate.amount*toCreate.price;
-                await foundHolding.save();
-            };
-            // console.log(foundHolding);
-            res.json(foundHolding);
-        };
+        const newHolding = await Holding.create(toCreate);
+        res.json(newHolding);
     } catch (error) {
-        // console.error(error);
         res.json({msg: error});
     };
 };

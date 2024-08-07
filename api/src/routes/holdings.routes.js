@@ -4,7 +4,8 @@ const router = Router();
 
 router.get('/holdings', getHoldings);
 router.post('/holdings', createHolding);
-router.put('/holdings/:id');
-router.delete('/holdings/:id');
+
+// router.put('/holdings/:id');
+// router.delete('/holdings/:id');
 
 export default router;

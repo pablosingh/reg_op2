@@ -1,18 +1,21 @@
 import { Router } from "express";
 import { 
-    getOperation, 
+    getOperations, 
     createOperation, 
     updateOperation, 
     deleteOperation 
-} from "../controllers/operations.controllers.js";
-import { getActualPrice } from "../controllers/getActualPrice.controllers.js";
+} from "../controllers/operations/operations.controllers.js";
+// import { getActualPrice } from "../controllers/getActualPrice.controllers.js";
 const router = Router();
 
-router.get('/operations', getOperation);
+router.get('/operations', getOperations);
 router.post('/operations', createOperation);
+
+// router.get('/actualp/:ticker', getActualPrice );
+
 router.put('/operations/:id', updateOperation);
 router.delete('/operations/:id', deleteOperation);
-router.get('/operations/:id');
-router.get('/actualp/:ticker', getActualPrice );
+
+// router.get('/operations/:id');
 
 export default router;

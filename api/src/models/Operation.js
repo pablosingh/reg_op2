@@ -11,9 +11,9 @@ const Operation = sequelize.define('Operations',{
         date: {
             type: DataTypes.DATE
         },
-        ticker:{
-            type: DataTypes.STRING
-        },
+        // ticker:{
+        //     type: DataTypes.STRING
+        // },
         amount:{
             type: DataTypes.FLOAT
         },

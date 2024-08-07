@@ -37,10 +37,11 @@ export default function AddOp () {
             amount: Number.parseFloat(data.amount),
             price: Number.parseFloat(data.price),
             total: Number.parseFloat(data.amount)*Number.parseFloat(data.price),
+            UserId: 1
         };
         // dispatch(addOperation(toSend));
         dispatch(addOperationToDB(toSend));
-        // dispatch(average(toSend));
+        dispatch(average(toSend));
         // console.log(toSend);
         setData(initialData);
     };

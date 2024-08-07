@@ -9,7 +9,7 @@ export const holdings = ( state = initialState, action ) => {
         case LOAD_HOLD_FROM_DB: 
             return {
                 ...state,
-                holdings: [...action.payload]
+                holdings: [...state.holdings, action.payload]
             };
         case AVERAGE:
             const operation = state?.holdings.find( f => f.ticker==action.payload.ticker );
@@ -30,7 +30,7 @@ export const holdings = ( state = initialState, action ) => {
             }else
                 return {
                     ...state,
-                    holdings: [...action.payload ],
+                    holdings: [...state.holdings, action.payload ],
                 };
         default: return state;
     };

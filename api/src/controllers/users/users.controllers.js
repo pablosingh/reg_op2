@@ -26,3 +26,14 @@ export const getUserById = async (req, res) => {
         res.json(error);
     }
 };
+
+export const getUsers = async (req, res) => {
+    try {
+        const foundUsers = await User.findOne({
+            include: Operation
+        });
+        res.json(foundUsers);
+    } catch (error) {
+        res.json(error);
+    }
+};

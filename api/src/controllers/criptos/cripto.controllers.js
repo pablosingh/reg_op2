@@ -1,8 +1,7 @@
-import Cripto from "../models/Cripto.js";
-import { getActualPriceFunc } from './getActualPrice.controllers.js';
+import Cripto from "../../models/Cripto.js";
+import { getActualPriceFunc } from '../getActualPrice.controllers.js';
 
 export const addCripto = async (req, res) => {
-    // console.log(req.body);
     const { cripto } = req.body;
     try {
         const newCripto =  await Cripto.create({
@@ -16,22 +15,19 @@ export const addCripto = async (req, res) => {
     }
 };
 
-export const getCripto = async (req, res) => {
-    // console.log("await");
-    // console.log(await getActualPriceFunc("btcusdt"));
-    const { cripto } = req.params;
-    // console.log(cripto);
-    try {
-        const foundCripto = await Cripto.findOne({
-            where: {
-                cripto: cripto.toUpperCase()
-            }
-        });
-        res.json(foundCripto);
-    } catch (error) {
-        res.json({message: error});
-    }
-};
+// export const getCripto = async (req, res) => {
+//     const { cripto } = req.params;
+//     try {
+//         const foundCripto = await Cripto.findOne({
+//             where: {
+//                 cripto: cripto.toUpperCase()
+//             }
+//         });
+//         res.json(foundCripto);
+//     } catch (error) {
+//         res.json({message: error});
+//     }
+// };
 
 export const getCriptos = async (req, res) => {
     try {

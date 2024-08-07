@@ -9,8 +9,6 @@ export const initialCriptoLoadingCMC = async () => {
         'X-CMC_PRO_API_KEY': '6b555911-d0f2-417f-9bd1-95cf5ea375aa'
     };
     try {
-        // const nDate = await difDate();
-        // if( nDate >= 1 ){
             await fetch(url, {
                 method: 'GET', 
                 headers: headers,
@@ -34,12 +32,9 @@ export const initialCriptoLoadingCMC = async () => {
                         });
                     });
                 })
-                // .then( rr => console.log(arrayCripto))
                 .catch(e => console.error(e) );
-        // }else res.json({responseElse: "else"});
     } catch (error) {
         console.error(error);
     }
-    // console.log(arrayCripto);
     return arrayCripto;
 };

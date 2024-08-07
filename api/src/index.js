@@ -8,11 +8,11 @@ import Operation from './models/Operation.js';
 import Cripto from './models/Cripto.js';
 import User from './models/User.js';
 
-User.hasMany(Operation, { foreinkey: "UserId" });
-Operation.belongsTo(User, { foreignKey: 'UserId' });
-
 User.hasMany(Holding, { foreinkey: "UserId" });
 Holding.belongsTo(User, { foreignKey: 'UserId'});
+
+Holding.hasMany(Operation, { foreinkey: "HoldingId" });
+Operation.belongsTo(Holding, { foreignKey: 'HoldingId' });
 
 
 sequelize.sync({ force: false })
@@ -21,7 +21,7 @@ sequelize.sync({ force: false })
             console.log('listening at 3001');
             // const difference = await getdifDate();
             // if( difference>=1 ) 
-                // initialCriptoLoadingCMC();
+            //     initialCriptoLoadingCMC();
             
         });
     })
