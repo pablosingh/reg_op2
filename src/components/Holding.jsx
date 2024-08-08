@@ -7,13 +7,9 @@ import { actualPrice } from '../redux/holdings/actions';
 export default function Holding() {
     const ops = useSelector( state => state?.operations.operations );
     const hol = useSelector( state => state?.holdings.holdings );
-    const dispatch = useDispatch();
     return (
         <Container>
-            {ops && ops.map( t => <CardTicker ticker={t} /> )}
-            ---------------------------------------------------------
-            {hol && hol.map( t => <CardHolding ticker={t} /> )}
-            {/* <button onClick={()=> dispatch(actualPrice()) }>dispatch</button> */}
+            {hol && hol.map( t => <CardHolding ticker={t} key={t.id}/> )}
         </Container>
     );
 };

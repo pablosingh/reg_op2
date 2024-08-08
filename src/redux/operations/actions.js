@@ -1,3 +1,4 @@
+import { loadHoldingsFromDB } from '../holdings/actions';
 export const ADD_OP = 'ADD_OP';
 export const DELETE_OP = 'DELETE_OP';
 export const TEST = 'TEST';
@@ -17,21 +18,21 @@ export const deleteOperation = (op) => {
     };
 };
 
-export const test = (op) => {
-    return async function(dispatch) {
-        try {
-            await fetch(`http://localhost:3001/cripto/btc`)
-                .then(js => js.json())
-                .then(res => {
-                    console.log(res);
-                    dispatch(addOperation(op));
-                })
-                .catch(e => console.error(e));
-        } catch (err) {
-            console.error(err);
-        }
-    };
-};
+// export const test = (op) => {
+//     return async function(dispatch) {
+//         try {
+//             await fetch(`http://localhost:3001/cripto/btc`)
+//                 .then(js => js.json())
+//                 .then(res => {
+//                     console.log(res);
+//                     dispatch(addOperation(op));
+//                 })
+//                 .catch(e => console.error(e));
+//         } catch (err) {
+//             console.error(err);
+//         }
+//     };
+// };
 
 export const addOperationToDB = (op) => {
     return async function (dispatch) {
@@ -49,6 +50,7 @@ export const addOperationToDB = (op) => {
                     console.log(res);
                     dispatch(addOperation(op));
                 })
+                .then( () => dispatch(loadHoldingsFromDB()) )
                 .catch(e => console.error(e));
         } catch (err) {
             console.error(err);
@@ -56,17 +58,17 @@ export const addOperationToDB = (op) => {
     }; 
 };
 
-export const loadOperationsFromDB = () => {
-    return async function(dispatch){
-        try {
-            await fetch(`http://localhost:3001/operations`)
-                .then( js => js.json() )
-                // .then( res => console.log(res) )
-                .then( ops => dispatch( { type: LOAD_OP_FROM_DB, payload: ops } ))
-                .catch( e => console.error(e));
-        } catch (error) {
-            console.error(error);
-        }
-    };
-};
+// export const loadOperationsFromDB = () => {
+//     return async function(dispatch){
+//         try {
+//             await fetch(`http://localhost:3001/operations`)
+//                 .then( js => js.json() )
+//                 // .then( res => console.log(res) )
+//                 .then( ops => dispatch( { type: LOAD_OP_FROM_DB, payload: ops } ))
+//                 .catch( e => console.error(e));
+//         } catch (error) {
+//             console.error(error);
+//         }
+//     };
+// };
 

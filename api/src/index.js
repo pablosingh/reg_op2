@@ -19,9 +19,9 @@ sequelize.sync({ force: false })
     .then( () => {
         app.listen(3001, async () => {
             console.log('listening at 3001');
-            // const difference = await getdifDate();
-            // if( difference>=1 ) 
-            //     initialCriptoLoadingCMC();
+            const difference = await getdifDate();
+            if( difference>=1 ) 
+                initialCriptoLoadingCMC();
             
         });
     })

@@ -30,7 +30,6 @@ export default function AddOp () {
         setBuy(e.target.value);
     };
     const sending = e => {
-        // console.log(data);
         const toSend = {
             ...data,
             buy,
@@ -39,10 +38,7 @@ export default function AddOp () {
             total: Number.parseFloat(data.amount)*Number.parseFloat(data.price),
             UserId: 1
         };
-        // dispatch(addOperation(toSend));
         dispatch(addOperationToDB(toSend));
-        dispatch(average(toSend));
-        // console.log(toSend);
         setData(initialData);
     };
     return(

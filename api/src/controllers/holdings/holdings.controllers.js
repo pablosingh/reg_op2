@@ -1,10 +1,11 @@
 import Holding from "../../models/Holding.js";
 import User from "../../models/User.js";
+import Operation from '../../models/Operation.js';
 
 export const getHoldings = async (req, res) => {
     try {
         const foundHoldings = await Holding.findAll({
-            include: User
+            include: [ Operation, User ]
         });
         res.json(foundHoldings);
     } catch (error) {

@@ -9,7 +9,7 @@ import { loadHoldingsFromDB } from '../redux/holdings/actions';
 export default function Body () {
     const dispatch = useDispatch();
     useEffect ( ()=> {
-        dispatch(loadOperationsFromDB());
+        // dispatch(loadOperationsFromDB());
         dispatch(loadHoldingsFromDB());
     }, []);
     return (
