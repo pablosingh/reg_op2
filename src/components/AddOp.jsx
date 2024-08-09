@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { addOperation, addOperationToDB } from '../redux/operations/actions'
-import { average } from "../redux/holdings/actions";
+import { loadHoldingsFromDB } from '../redux/holdings/actions'
+import CreateDate from './CreateDate';
 
 export default function AddOp () {
     const initialData = {
@@ -29,6 +29,24 @@ export default function AddOp () {
     const handleBuy = e => {
         setBuy(e.target.value);
     };
+    const addOpsToDB = async (toAdd) => {
+        console.log(toAdd);
+        try {
+            await fetch(`http://localhost:3001/operations`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(toAdd),
+              })
+                .then(js => js.json())
+                // .then(res => console.log(res))
+                .then( () => dispatch(loadHoldingsFromDB()) )
+                .catch(e => console.error(e));
+        } catch (err) {
+            console.error(err);
+        }
+    }
     const sending = e => {
         const toSend = {
             ...data,
@@ -38,7 +56,7 @@ export default function AddOp () {
             total: Number.parseFloat(data.amount)*Number.parseFloat(data.price),
             UserId: 1
         };
-        dispatch(addOperationToDB(toSend));
+        addOpsToDB(toSend);
         setData(initialData);
     };
     return(
@@ -46,6 +64,7 @@ export default function AddOp () {
             <label>Fecha</label>
             <input type="text" name="date" value={data.date} 
                 className="" onChange={changing}/>
+            <CreateDate/>
             <br/>
             <label>Ticker</label>
             <input type="text" name="ticker" value={data.ticker}

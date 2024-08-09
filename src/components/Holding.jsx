@@ -1,11 +1,8 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
-import CardTicker from "./CardTicker";
 import CardHolding from "./CardHolding";
-import { actualPrice } from '../redux/holdings/actions';
 
 export default function Holding() {
-    const ops = useSelector( state => state?.operations.operations );
     const hol = useSelector( state => state?.holdings.holdings );
     return (
         <Container>

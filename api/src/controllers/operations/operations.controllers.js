@@ -4,6 +4,9 @@ import Holding from "../../models/Holding.js";
 
 export const createOperation = async (req, res) => {
     const { date, ticker, amount, price, total, buy, exchange, comment, UserId } = req.body;
+    const formattedBuy = buy ==='true' ? true : false;
+    console.log("req body");
+    console.log(req.body);
     const dateTicker = new Date();
     const formattedDate = dateTicker.toLocaleDateString('es-ES', {
         day: '2-digit',
@@ -26,13 +29,19 @@ export const createOperation = async (req, res) => {
         if(foundHolding){
             const newOperation = await Operation.create({
                 ...toCreate,
-                buy,
+                formattedBuy,
                 exchange,
                 HoldingId: foundHolding.id
             });
-            foundHolding.amount += toCreate.amount;
-            foundHolding.total += toCreate.total;
-            foundHolding.price = foundHolding.total / foundHolding.amount;
+            if(formattedBuy){
+                foundHolding.amount += toCreate.amount;
+                foundHolding.total += toCreate.total;
+                foundHolding.price = foundHolding.total / foundHolding.amount;
+            }else{
+                foundHolding.amount -= toCreate.amount;
+                foundHolding.total -= toCreate.total;
+                foundHolding.price = foundHolding.total / foundHolding.amount;
+            };
             await foundHolding.save();
             res.json(newOperation);
         }else{
@@ -43,7 +52,7 @@ export const createOperation = async (req, res) => {
             });
             const newOperation = await Operation.create({
                 ...toCreate,
-                buy,
+                formattedBuy,
                 exchange,
                 HoldingId: newHolding.id
             });

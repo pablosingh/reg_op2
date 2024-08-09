@@ -1,12 +1,4 @@
-export const AVERAGE = 'AVERAGE';
 export const LOAD_HOLD_FROM_DB = 'LOAD_HOLD_FROM_DB';
-
-// export const average = (op) => {
-//     return {
-//         type: AVERAGE,
-//         payload: op,
-//     };
-// };
 
 // export function actualPrice () {
 //     return async function (dispatch) {
