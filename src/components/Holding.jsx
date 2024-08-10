@@ -15,4 +15,6 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     min-width: 50vw;
+    padding: 0em 0em;
+    margin: 0em;
 `;

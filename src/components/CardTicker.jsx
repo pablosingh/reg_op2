@@ -17,6 +17,7 @@ export default function CardTicker(props) {
             <Sector><label>Estado</label>{buy ? "Compra": "Venta"}</Sector>
             <Sector><label>Exchange</label>{exchange}</Sector>
             <Sector><label>Comentarios</label>{comment}</Sector>
+            <Sector><Btn onClick={()=>{}}>Editar</Btn></Sector>
         </Container>
     );
 };
@@ -37,4 +38,17 @@ const Sector = styled.div`
     margin: 0.5em;
     padding: 0.1em;
     border-radius: 0.5em;
+`;
+
+const Btn = styled.button`
+    background-color: rgba(8,108,9,1);
+    color: white;
+    border-radius: 1em;
+    padding: 0.2em 1em;
+    margin: 0.3em;
+    transition: all .4s ease;
+    &:hover{
+        background-color: rgba(8,108,9,0.5);
+        color: black;
+    }
 `;

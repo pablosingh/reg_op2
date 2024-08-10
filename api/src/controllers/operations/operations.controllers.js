@@ -4,7 +4,7 @@ import Holding from "../../models/Holding.js";
 
 export const createOperation = async (req, res) => {
     const { date, ticker, amount, price, total, buy, exchange, comment, UserId } = req.body;
-    const formattedBuy = buy == 'true' ? true : false;
+    const formattedBuy = buy === 'true' ? true : false;
     console.log("req body");
     console.log(req.body);
     // const dateTicker = new Date();
@@ -22,6 +22,7 @@ export const createOperation = async (req, res) => {
     };
     console.log("toCreate")
     console.log(toCreate);
+    console.log(typeof buy);
     try {
         const foundHolding = await Holding.findOne({
             where: {
@@ -31,11 +32,11 @@ export const createOperation = async (req, res) => {
         if(foundHolding){
             const newOperation = await Operation.create({
                 ...toCreate,
-                formattedBuy,
+                buy,
                 exchange,
                 HoldingId: foundHolding.id
             });
-            if(formattedBuy){
+            if(buy){
                 foundHolding.amount += toCreate.amount;
                 foundHolding.total += toCreate.total;
                 foundHolding.price = foundHolding.total / foundHolding.amount;
@@ -45,6 +46,7 @@ export const createOperation = async (req, res) => {
                 foundHolding.price = foundHolding.total / foundHolding.amount;
             };
             await foundHolding.save();
+            console.log(newOperation);
             res.json(newOperation);
         }else{
             const newHolding = await Holding.create({
@@ -54,10 +56,11 @@ export const createOperation = async (req, res) => {
             });
             const newOperation = await Operation.create({
                 ...toCreate,
-                formattedBuy,
+                buy,
                 exchange,
                 HoldingId: newHolding.id
             });
+            console.log(newOperation);
             res.json(newOperation);
         };        
     } catch (error) {

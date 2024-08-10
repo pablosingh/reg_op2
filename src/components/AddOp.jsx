@@ -37,7 +37,7 @@ export default function AddOp () {
     };
     const handlerDate = ( objDate ) => {
         setMyDate(objDate);
-        console.log(objDate);
+        // console.log(objDate);
     };
     const addOpsToDB = async (toAdd) => {
         console.log(toAdd);
@@ -73,53 +73,83 @@ export default function AddOp () {
         setData(initialData);
     };
     return(
-        <div>
-            <label>Fecha</label>
-            {/* <input type="text" name="date" value={data.date} 
-                className="" onChange={changing}/> */}
+        <Container>
             <CreateDate handlerDate={handlerDate}/>
-            <br/>
-            <label>Ticker</label>
-            <input type="text" name="ticker" value={data.ticker}
-                className="" onChange={changing}/>
-            <br/>
-            <label>Cantidad</label>
-            <input type="text" name="amount" value={data.amount}
-                className="" onChange={changing}/>
-            <br/>
-            <label>Precio</label>
-            <input type="text" name="price" value={data.price}
-                className="" onChange={changing}/>
-            <br/>
-            <label>Compra 
-                <input type="radio" name="buy" value={true} defaultChecked={true}
-                    className="" onChange={handleBuy}/>
-            </label>
-            <label>Venta 
-                <input type="radio" name="buy" value={false}
-                    className="" onChange={handleBuy}/>
-            </label>
-            <br/>
-            <label>Exchange</label>
-            <input type="text" name="exchange" value={data.exchange}
-                className="" onChange={changing}/>
-            <br/>
-            <label>Comentarios</label>
-            <input type="text" name="comment" value={data.comment}
-                className="" onChange={changing}/>
-            <br/>
-            <Btn onClick={sending}>Agregar</Btn>
-            <Btn onClick={()=> console.log(state)}>Estado</Btn>
-        </div>
+            <Sector>
+                <label>Ticker</label>
+                <InputData type="text" name="ticker" value={data.ticker}
+                    className="" onChange={changing}/>
+            </Sector>
+            <Sector>
+                <label>Cantidad</label>
+                <InputData type="text" name="amount" value={data.amount}
+                    className="" onChange={changing}/>
+            </Sector>
+            <Sector>
+                <label>Precio</label>
+                <InputData type="text" name="price" value={data.price}
+                    className="" onChange={changing}/>
+            </Sector>
+            <Sector>
+                <label>Compra 
+                    <InputData type="radio" name="buy" value={true} defaultChecked={true}
+                        className="" onChange={handleBuy}/>
+                </label>
+                <label>Venta 
+                    <InputData type="radio" name="buy" value={false}
+                        className="" onChange={handleBuy}/>
+                </label>
+            </Sector>
+            <Sector>
+                <label>Exchange</label>
+                <InputData type="text" name="exchange" value={data.exchange}
+                    className="" onChange={changing}/>
+            </Sector>
+            <Sector>
+                <label>Comentarios</label>
+                <InputData type="text" name="comment" value={data.comment}
+                    className="" onChange={changing}/>
+            </Sector>
+            <Sector>
+                <Btn onClick={sending}>Agregar</Btn>
+                <Btn onClick={()=> console.log(state)}>Estado</Btn>
+                <Btn onClick={()=> console.log(buy)}>buy</Btn>
+            </Sector>
+        </Container>
     );
 };
 
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    // background-color: rgba(220,130,17,255);
+    margin: 0em;
+    padding: 0em;
+    align-items: center;
+    justify-content: center;
+    // border: 2px solid #333;
+`;
+const Sector = styled.div`
+    // background-color: rgba(220,130,17,255);
+    // max-width: 25vw;
+    color: black;
+    display: flex;
+    // border: 2px solid #333;
+    margin: 0em;
+    padding: 0.01em;
+    // border-radius: 0.5em;
+    align-items: center;
+`;
+const InputData = styled.input`
+    max-width: 7vw;
+    margin: 0.2em 0em 0em 0.7em;
+`;
 const Btn = styled.button`
     background-color: rgba(8,108,9,1);
     color: white;
     border-radius: 1em;
     padding: 0.2em 1em;
-    margin: 1em;
+    margin: 0.3em;
     transition: all .4s ease;
     &:hover{
         background-color: rgba(8,108,9,0.5);

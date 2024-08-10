@@ -24,5 +24,6 @@ const Container = styled.div`
     flex-direction: column;
     background-color: #e5e5e5;
     justify-content: center;
-    padding: 2em 0em;
+    padding: 0em 0em;
+    margin: 0em;
 `;
