@@ -15,14 +15,14 @@ export const getHoldings = async (req, res) => {
 
 export const createHolding = async (req, res) => {
     const { date, ticker, amount, price, total, comment, UserId } = req.body;
-    const dateTicker = new Date();
-    const formattedDate = dateTicker.toLocaleDateString('es-ES', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-    });
+    // const dateTicker = new Date();
+    // const formattedDate = dateTicker.toLocaleDateString('es-ES', {
+    //     day: '2-digit',
+    //     month: '2-digit',
+    //     year: 'numeric',
+    // });
     const toCreate = { 
-        date: formattedDate,
+        date: date,
         ticker: ticker.toUpperCase(), 
         amount: Number.parseFloat(amount),
         price: Number.parseFloat(price), 

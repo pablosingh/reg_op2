@@ -35,17 +35,9 @@ export default function AddOp () {
     const handleBuy = e => {
         setBuy(e.target.value);
     };
-    const handlerDate = ( y , m , d ) => {
-        setMyDate({
-            year: y,
-            month: m,
-            day: d,
-        });
-        console.log({
-            year: y,
-            month: m,
-            day: d,
-        });
+    const handlerDate = ( objDate ) => {
+        setMyDate(objDate);
+        console.log(objDate);
     };
     const addOpsToDB = async (toAdd) => {
         console.log(toAdd);
@@ -66,22 +58,25 @@ export default function AddOp () {
         }
     }
     const sending = e => {
+        const dateTicker = new Date(myDate.year, myDate.month, myDate.day);
         const toSend = {
             ...data,
+            date: dateTicker,
             buy,
             amount: Number.parseFloat(data.amount),
             price: Number.parseFloat(data.price),
             total: Number.parseFloat(data.amount)*Number.parseFloat(data.price),
             UserId: 1
         };
+        console.log(toSend);
         addOpsToDB(toSend);
         setData(initialData);
     };
     return(
         <div>
             <label>Fecha</label>
-            <input type="text" name="date" value={data.date} 
-                className="" onChange={changing}/>
+            {/* <input type="text" name="date" value={data.date} 
+                className="" onChange={changing}/> */}
             <CreateDate handlerDate={handlerDate}/>
             <br/>
             <label>Ticker</label>

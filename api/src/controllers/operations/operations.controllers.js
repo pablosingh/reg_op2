@@ -4,22 +4,24 @@ import Holding from "../../models/Holding.js";
 
 export const createOperation = async (req, res) => {
     const { date, ticker, amount, price, total, buy, exchange, comment, UserId } = req.body;
-    const formattedBuy = buy ==='true' ? true : false;
+    const formattedBuy = buy == 'true' ? true : false;
     console.log("req body");
     console.log(req.body);
-    const dateTicker = new Date();
-    const formattedDate = dateTicker.toLocaleDateString('es-ES', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-    });
+    // const dateTicker = new Date();
+    // const formattedDate = dateTicker.toLocaleDateString('es-ES', {
+    //     day: '2-digit',
+    //     month: '2-digit',
+    //     year: 'numeric',
+    // });
     const toCreate = { 
-        date: formattedDate,
+        date: date,
         amount: Number.parseFloat(amount),
         price: Number.parseFloat(price), 
         total: Number.parseFloat(total),
         comment, 
     };
+    console.log("toCreate")
+    console.log(toCreate);
     try {
         const foundHolding = await Holding.findOne({
             where: {

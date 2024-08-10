@@ -13,7 +13,6 @@ export default function CreateDate( {handlerDate} ){
             ...newDate,
             [e.target.name]: e.target.value,
         });
-        console.log(newDate);
         handlerDate({
             ...newDate,
             [e.target.name]: e.target.value,
@@ -26,12 +25,7 @@ export default function CreateDate( {handlerDate} ){
             <input type="number" name="year"  value={newDate.year} onChange={changing} ></input>
             <Btn onClick={()=> {
                 const dateTicker = new Date(newDate.year, newDate.month, newDate.day);
-                const formattedDate = dateTicker.toLocaleDateString('es-ES', {
-                    day: '2-digit',
-                    month: '2-digit',
-                    year: 'numeric',
-                });
-                console.log(formattedDate);
+                console.log(dateTicker);
             }}>Enviar</Btn>
         </div>
     );
