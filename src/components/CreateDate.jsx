@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from 'styled-components';
 
-export default function CreateDate(){
+export default function CreateDate( {handlerDate} ){
     const initialDate = {
         day: 1,
         month: 0,
@@ -13,13 +13,26 @@ export default function CreateDate(){
             ...newDate,
             [e.target.name]: e.target.value,
         });
+        console.log(newDate);
+        handlerDate({
+            ...newDate,
+            [e.target.name]: e.target.value,
+        });
     };
     return (
         <div>
             <input type="number" name="day" value={newDate.day} onChange={changing} ></input>
             <input type="number" name="month"  value={newDate.month} onChange={changing} ></input>
             <input type="number" name="year"  value={newDate.year} onChange={changing} ></input>
-            <Btn onClick={()=> console.log(newDate)}>Enviar</Btn>
+            <Btn onClick={()=> {
+                const dateTicker = new Date(newDate.year, newDate.month, newDate.day);
+                const formattedDate = dateTicker.toLocaleDateString('es-ES', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                });
+                console.log(formattedDate);
+            }}>Enviar</Btn>
         </div>
     );
 };

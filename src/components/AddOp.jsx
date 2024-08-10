@@ -15,8 +15,14 @@ export default function AddOp () {
         exchange: "",
         comment: "",
     }
+    const initialDate = {
+        day: 1,
+        month: 0,
+        year: 2024,
+    };
     const [ data, setData ] = useState(initialData);
     const [ buy, setBuy ] = useState(true);
+    const [ myDate, setMyDate ] = useState(initialDate);
     const dispatch = useDispatch();
     const state = useSelector( state => state );
     const changing = e => {
@@ -28,6 +34,18 @@ export default function AddOp () {
     };
     const handleBuy = e => {
         setBuy(e.target.value);
+    };
+    const handlerDate = ( y , m , d ) => {
+        setMyDate({
+            year: y,
+            month: m,
+            day: d,
+        });
+        console.log({
+            year: y,
+            month: m,
+            day: d,
+        });
     };
     const addOpsToDB = async (toAdd) => {
         console.log(toAdd);
@@ -64,7 +82,7 @@ export default function AddOp () {
             <label>Fecha</label>
             <input type="text" name="date" value={data.date} 
                 className="" onChange={changing}/>
-            <CreateDate/>
+            <CreateDate handlerDate={handlerDate}/>
             <br/>
             <label>Ticker</label>
             <input type="text" name="ticker" value={data.ticker}
