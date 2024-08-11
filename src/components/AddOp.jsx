@@ -68,7 +68,7 @@ export default function AddOp () {
             total: Number.parseFloat(data.amount)*Number.parseFloat(data.price),
             UserId: 1
         };
-        console.log(toSend);
+        // console.log(toSend);
         addOpsToDB(toSend);
         setData(initialData);
     };

@@ -4,6 +4,7 @@ import Holding from './Holding';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { loadHoldingsFromDB } from '../redux/holdings/actions';
+import Profile from './Profile';
 
 export default function Body () {
     const dispatch = useDispatch();
@@ -12,6 +13,7 @@ export default function Body () {
     }, []);
     return (
         <Container>
+            <Profile/>
             <AddOp/>
             <Holding/>
         </Container>

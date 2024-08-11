@@ -39,6 +39,8 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     background-color: rgba(22,130,177,255);
+    margin: 0;
+    padding: 0;
 `;
 
 const Sector = styled.div`
@@ -54,7 +56,7 @@ const DivOps = styled.div`
     display: flex;
     flex-direction: column;
     border: 2px solid #333;
-    margin: 0.5em;
+    margin: 0.1em;
     padding: 0.1em;
     border-radius: 0.5em;
 `;
@@ -63,7 +65,7 @@ const Item = styled.div`
     display: flex;
     flex-direction: column;
     border: 2px solid #333;
-    margin: 0.5em;
+    margin: 0.1em;
     padding: 0.1em;
     border-radius: 0.5em;
 `;

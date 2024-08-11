@@ -1,15 +1,12 @@
-import { Provider } from 'react-redux';
-import store from './redux/store';
-import './App.css';
 import Body from './components/Body';
+import { useAuth0 } from '@auth0/auth0-react';
+import LoginButton from './components/LoginButton';
+
 
 function App() {
+  const { isAuthenticated } = useAuth0();
   return (
-    <Provider store={store}>
-      <div className="App">
-        <Body/>
-      </div>
-    </Provider>
+    isAuthenticated ? <Body/> : <LoginButton/>
   );
 };
 
