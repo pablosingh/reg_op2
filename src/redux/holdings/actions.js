@@ -1,4 +1,5 @@
 export const LOAD_HOLD_FROM_DB = 'LOAD_HOLD_FROM_DB';
+export const LOAD_USER_ID = 'LOAD_USER_ID';
 
 // export function actualPrice () {
 //     return async function (dispatch) {
@@ -21,7 +22,7 @@ export const LOAD_HOLD_FROM_DB = 'LOAD_HOLD_FROM_DB';
 //     };  
 // };
 
-export function loadHoldingsFromDB () {
+export function loadHoldingsFromDB (userId) {
     return async function (dispatch) {
         var holdingsToSend = [];
         var promesas = [];
@@ -59,3 +60,25 @@ export function loadHoldingsFromDB () {
     };
 };
 
+export function loadUserId (email) {
+    return async function (dispatch) {
+        console.log("load user id");
+        try {
+            await fetch(`http://localhost:3001/userbyemail`, {
+                method: 'POST',
+                body: JSON.stringify({
+                    email: email
+                }),
+                mode: 'cors', // Modo CORS
+            })
+                // .then( js => js.json() )
+                .then( user => {
+                    console.log(user);
+                    dispatch({ type: LOAD_USER_ID, payload: user.id}) 
+                })
+                .catch( e => console.error(e) )
+        } catch (error) {
+            console.error(error)
+        }
+    };
+};

@@ -3,14 +3,40 @@ import AddOp from './AddOp';
 import Holding from './Holding';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { loadHoldingsFromDB } from '../redux/holdings/actions';
+import { loadHoldingsFromDB, loadUserId } from '../redux/holdings/actions';
 import Profile from './Profile';
+import { useAuth0 } from '@auth0/auth0-react';
 
 export default function Body () {
     const dispatch = useDispatch();
+    const { user } = useAuth0();
+    const initUser = async (user) => {
+        try {
+            await fetch('http://localhost:3001/userbyemail', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // Otros encabezados necesarios según la API (por ejemplo, tokens de autorización)
+                },
+                mode: 'cors', // Modo CORS
+                body: JSON.stringify({
+                    email: user.email
+                })
+            })
+            .then( js => js.json() )
+            .then( res => console.log(res) )
+            .catch( e => console.error(e) );
+        } catch (error) {
+            console.error(error);
+        };
+    };
     useEffect ( ()=> {
+        // initUser(user);
+        // console.log("body")
+        if(user.email)
+            dispatch(loadUserId(user.email));
         dispatch(loadHoldingsFromDB());
-    }, []);
+    }, [user]);
     return (
         <Container>
             <Profile/>

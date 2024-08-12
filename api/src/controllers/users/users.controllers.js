@@ -12,6 +12,31 @@ export const createUser = async (req, res) => {
     }
 };
 
+export const getUserByEmail = async (req, res) => {
+    const { email, name } = req.body;
+    console.log(req.body);
+    try {
+        const foundUser = await User.findOne({
+            where: {
+                email
+            },
+        });
+        console.log(foundUser);
+        if(foundUser)
+            res.json(foundUser);
+        else{
+            const newUser = await User.create({
+                email,
+                name,
+            });
+            res.json(newUser);
+        }
+    } catch (error) {
+        res.json(error);
+    }
+};
+
+
 export const getUserById = async (req, res) => {
     const { id } = req.params;
     try {
@@ -28,6 +53,7 @@ export const getUserById = async (req, res) => {
 };
 
 export const getUsers = async (req, res) => {
+
     try {
         const foundUsers = await User.findOne({
             include: Operation
