@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import AddOp from './AddOp';
 import Holding from './Holding';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loadHoldingsFromDB, loadUserId } from '../redux/holdings/actions';
 import Profile from './Profile';
 import { useAuth0 } from '@auth0/auth0-react';
@@ -10,6 +10,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 export default function Body () {
     const dispatch = useDispatch();
     const { user } = useAuth0();
+    const state = useSelector( state => state );
     const initUser = async (user) => {
         try {
             await fetch('http://localhost:3001/userbyemail', {
@@ -31,12 +32,8 @@ export default function Body () {
         };
     };
     useEffect ( ()=> {
-        // initUser(user);
-        // console.log("body")
-        if(user.email)
-            dispatch(loadUserId(user.email));
-        dispatch(loadHoldingsFromDB());
-    }, [user]);
+        dispatch(loadUserId(user))
+    }, []);
     return (
         <Container>
             <Profile/>

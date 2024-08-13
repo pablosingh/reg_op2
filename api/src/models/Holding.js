@@ -24,14 +24,7 @@ const Holding = sequelize.define('Holdings',{
         },
         comment: {
             type: DataTypes.STRING
-        },
-        // userId: {              // Clave externa que hace referencia a la tabla User
-        //     type: DataTypes.INTEGER,
-        //     references: {
-        //       model: 'User',    // Nombre del modelo de referencia
-        //       key: 'id'         // Clave primaria en la tabla User
-        //     }
-        // }
+        }
     },
     {
         timestamps: false

@@ -1,6 +1,5 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.js';
-import User from './User.js'
 
 const Operation = sequelize.define('Operations',{
         id:{
@@ -11,9 +10,6 @@ const Operation = sequelize.define('Operations',{
         date: {
             type: DataTypes.DATE
         },
-        // ticker:{
-        //     type: DataTypes.STRING
-        // },
         amount:{
             type: DataTypes.FLOAT
         },
@@ -31,14 +27,7 @@ const Operation = sequelize.define('Operations',{
         },
         comment: {
             type: DataTypes.STRING
-        },
-        // userId: {              // Clave externa que hace referencia a la tabla User
-        //     type: DataTypes.INTEGER,
-        //     references: {
-        //       model: User,    // Nombre del modelo de referencia
-        //       key: 'id'         // Clave primaria en la tabla User
-        //     }
-        // }
+        }
     },
     {
         timestamps: false

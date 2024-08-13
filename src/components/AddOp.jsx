@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { loadHoldingsFromDB } from '../redux/holdings/actions'
@@ -40,7 +40,7 @@ export default function AddOp () {
         // console.log(objDate);
     };
     const addOpsToDB = async (toAdd) => {
-        console.log(toAdd);
+        // console.log(toAdd);
         try {
             await fetch(`http://localhost:3001/operations`, {
                 method: 'POST',
@@ -51,7 +51,7 @@ export default function AddOp () {
               })
                 .then(js => js.json())
                 // .then(res => console.log(res))
-                .then( () => dispatch(loadHoldingsFromDB()) )
+                .then( () => dispatch(loadHoldingsFromDB(state.holdings.userId)) )
                 .catch(e => console.error(e));
         } catch (err) {
             console.error(err);
@@ -66,12 +66,15 @@ export default function AddOp () {
             amount: Number.parseFloat(data.amount),
             price: Number.parseFloat(data.price),
             total: Number.parseFloat(data.amount)*Number.parseFloat(data.price),
-            UserId: 1
+            UserId: state.holdings.userId
         };
         // console.log(toSend);
         addOpsToDB(toSend);
         setData(initialData);
     };
+    // useEffect( ()=> {
+    //     console.log("Add Op");
+    // }, []);
     return(
         <Container>
             <CreateDate handlerDate={handlerDate}/>

@@ -1,7 +1,5 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.js';
-import Operation from './Operation.js';
-import Holding from './Holding.js';
 
 const User = sequelize.define('User', {
         id: {
@@ -9,28 +7,18 @@ const User = sequelize.define('User', {
             primaryKey: true,
             autoIncrement: true
         },
-        user: {
-            type: DataTypes.STRING
-        },
         email: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            allowNull: false
         },
         name: {
-            type: DataTypes.STRING
-        },
-        password: {
-            type: DataTypes.STRING
-        },
+            type: DataTypes.STRING,
+            allowNull: false
+        }
     },
     {
       timestamps: false
     }
 );
-
-// User.hasMany(Operation, { foreinkey: "userId" });
-// Operation.belongsTo(User, { foreignKey: 'userId' });
-
-// User.hasMany(Holding, { foreinkey: "userId" });
-// Holding.belongsTo(User, { foreignKey: 'userId'});
 
 export default User;

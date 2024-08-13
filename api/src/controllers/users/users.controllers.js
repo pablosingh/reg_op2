@@ -3,9 +3,9 @@ import User from "../../models/User.js";
 
 export const createUser = async (req, res) => {
     console.log(req.body);
-    const { user, email, name, password } = req.body;
+    const { user, email, name } = req.body;
     try {
-        const newUser =  await User.create({ user, email, name, password });
+        const newUser =  await User.create({ user, email, name });
         res.json(newUser);
     } catch (error) {
         res.json({message: error});
@@ -27,7 +27,7 @@ export const getUserByEmail = async (req, res) => {
         else{
             const newUser = await User.create({
                 email,
-                name,
+                name
             });
             res.json(newUser);
         }

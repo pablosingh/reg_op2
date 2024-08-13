@@ -22,11 +22,12 @@ export const createOperation = async (req, res) => {
     };
     console.log("toCreate")
     console.log(toCreate);
-    console.log(typeof buy);
+    // console.log(typeof buy);
     try {
         const foundHolding = await Holding.findOne({
             where: {
-                ticker: ticker.toUpperCase()
+                ticker: ticker.toUpperCase(),
+                UserId
             }
         })
         if(foundHolding){
