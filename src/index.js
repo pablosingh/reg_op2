@@ -7,6 +7,7 @@ import authConfig from './auth_config.json';
 import { Auth0Provider } from '@auth0/auth0-react';
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -17,7 +18,9 @@ root.render(
       authorizationParams={{ redirect_uri: window.location.origin }}
     >
       <Provider store={store}>
-        <App />
+        <Router>
+          <App />
+        </Router>
       </Provider>
     </Auth0Provider>
   // </React.StrictMode> // Lo elimino para ejecutar 1 sola vez el useEffect
