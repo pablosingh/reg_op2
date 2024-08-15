@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import app from './app.js';
 import sequelize from './database/database.js';
 import { initialCriptoLoadingCMC } from './controllers/initDBcmc.controllers.js';
@@ -14,11 +15,13 @@ Holding.belongsTo(User, { foreignKey: 'UserId'});
 Holding.hasMany(Operation, { foreinkey: "HoldingId" });
 Operation.belongsTo(Holding, { foreignKey: 'HoldingId' });
 
+const port = process.env.PORT || 3001;
+// const dbUrl = process.env.DATABASE_URL;
 
 sequelize.sync({ force: false })
     .then( () => {
-        app.listen(3001, async () => {
-            console.log('listening at 3001');
+        app.listen(port, async () => {
+            console.log('listening at ', port);
             const difference = await getdifDate();
             if( difference>=1 ) 
                 initialCriptoLoadingCMC();

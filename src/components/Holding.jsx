@@ -14,7 +14,8 @@ export default function Holding() {
 const Container = styled.div`
     display: flex;
     flex-direction: column;
+    min-height: 80vh;
     min-width: 50vw;
-    padding: 0em 0em;
+    padding: 0.9em 0em;
     margin: 0em;
 `;

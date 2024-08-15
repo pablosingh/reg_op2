@@ -125,6 +125,7 @@ export default function AddOp () {
 const Container = styled.div`
     display: flex;
     flex-direction: column;
+    min-height: 80vh;
     // background-color: rgba(220,130,17,255);
     margin: 0em;
     padding: 0em;

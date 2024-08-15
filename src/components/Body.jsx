@@ -49,7 +49,7 @@ export default function Body () {
 };
 
 const Container = styled.div`
-    min-height: 80vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     background-color: #e5e5e5;
