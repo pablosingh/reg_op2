@@ -28,4 +28,5 @@ sequelize.sync({ force: false })
             
         });
     })
+    .catch( e => console.error(e) );
 // CREATE TABLE "Criptos2" AS SELECT * FROM "Criptos";

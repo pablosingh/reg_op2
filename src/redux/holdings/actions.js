@@ -4,19 +4,22 @@ export const LOAD_USER_ID = 'LOAD_USER_ID';
 // function actualPrice
 // apiURL = `https://www.binance.us/api/v3/ticker/price?symbol=btcusdt`;
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 export function loadHoldingsFromDB (userId) {
     return async function (dispatch) {
         var holdingsToSend = [];
         var promesas = [];
         var subPromesas = [];
         try {
-            await fetch(`http://localhost:3001/holdings/${userId}`)
+            // const apiUrlDev = 'http://localhost:3001'
+            await fetch(`${apiUrl}/holdings/${userId}`)
                 .then( js => js.json() )
                 .then( holdingsResDB => {
                     if(holdingsResDB.length > 0){
                         holdingsToSend = [...holdingsResDB];
                         holdingsToSend.forEach( hold => {
-                            promesas.push(fetch(`http://localhost:3001/dayprice/${hold.ticker}`))
+                            promesas.push(fetch(`${apiUrl}/dayprice/${hold.ticker}`))
                         })
                     }
                 })
@@ -58,7 +61,7 @@ export function loadUserId ({email, name}) {
             }
         };
         try {
-            await fetch(`http://localhost:3001/userbyemail`, options)
+            await fetch(`${apiUrl}/userbyemail`, options)
                 .then( js => js.json() )
                 .then( usr => {
                     dispatch({ type: LOAD_USER_ID, payload: usr.id}) 
