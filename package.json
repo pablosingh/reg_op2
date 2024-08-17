@@ -1,6 +1,6 @@
 {
   "name": "regoperaciones",
-  "homepage": "https://pablosingh.github.io/reg_op2",
+  "homepage": "https://reg-op2.netlify.app/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
