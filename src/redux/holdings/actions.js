@@ -4,8 +4,8 @@ export const LOAD_USER_ID = 'LOAD_USER_ID';
 // function actualPrice
 // apiURL = `https://www.binance.us/api/v3/ticker/price?symbol=btcusdt`;
 
-// const apiUrl = process.env.REACT_APP_API_URL;
-const apiUrl = process.env.REACT_APP_API_URL_DEV;
+const apiUrl = process.env.REACT_APP_API_URL;
+// const apiUrl = process.env.REACT_APP_API_URL_DEV;
 // const apiUrlDev = 'http://localhost:3001'
 
 export function loadHoldingsFromDB (userId) {
