@@ -42,9 +42,8 @@ export default function AddOp () {
     const addOpsToDB = async (toAdd) => {
         // console.log(toAdd);
         const apiUrl = process.env.REACT_APP_API_URL;
-        // const apiUrl = process.env.REACT_APP_API_URL_DEV;
+        console.log(apiUrl);
         try {
-            // const apiUrlDev = 'http://localhost:3001';
             await fetch(`${apiUrl}/operations`, {
                 method: 'POST',
                 headers: {

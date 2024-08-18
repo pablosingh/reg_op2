@@ -3,10 +3,9 @@ export const LOAD_USER_ID = 'LOAD_USER_ID';
 
 // function actualPrice
 // apiURL = `https://www.binance.us/api/v3/ticker/price?symbol=btcusdt`;
+// REACT_APP_API_URL=https://reg-op2-api.onrender.com
 
 const apiUrl = process.env.REACT_APP_API_URL;
-// const apiUrl = process.env.REACT_APP_API_URL_DEV;
-// const apiUrlDev = 'http://localhost:3001'
 
 export function loadHoldingsFromDB (userId) {
     return async function (dispatch) {
@@ -50,6 +49,9 @@ export function loadHoldingsFromDB (userId) {
 
 export function loadUserId ({email, name}) {
     return async function (dispatch) {
+        console.log(apiUrl);
+        console.log(email);
+        console.log(name);
         const options = {
             method: 'POST',
             body: JSON.stringify({
