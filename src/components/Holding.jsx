@@ -4,9 +4,10 @@ import CardHolding from "./CardHolding";
 
 export default function Holding() {
     const hol = useSelector( state => state?.holdings.holdings );
+    const state = useSelector( state => state?.holdings.holdings );
     return (
         <Container>
-            <Btn onClick={()=> console.log(hol)}>Estado</Btn>
+            <Btn onClick={()=> console.log(state)}>Estado</Btn>
             {hol && hol.map( t => <CardHolding ticker={t} key={t.id}/> )}
         </Container>
     );
