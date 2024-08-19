@@ -32,7 +32,7 @@ export function loadHoldingsFromDB (userId) {
                                     subValues.forEach( (sub, i) => {
                                         if(sub){
                                             holdingsToSend[i].actualPrice = sub.price;
-                                            holdingsToSend[i].profits = holdingsToSend[i].actualPrice-holdingsToSend[i].price;
+                                            holdingsToSend[i].profits = (holdingsToSend[i].actualPrice*holdingsToSend[i].amount)-(holdingsToSend[i].price*holdingsToSend[i].amount);
                                         }
                                     });
                                 })
