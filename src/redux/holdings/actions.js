@@ -13,8 +13,8 @@ export function loadHoldingsFromDB (userId) {
         var promesas = [];
         var subPromesas = [];
         try {
-            // await fetch(`${apiUrl}/holdings/${userId}`)
-            await fetch(`http://localhost:3001/holdings/${userId}`)
+            await fetch(`http://${apiUrl}/holdings/${userId}`)
+            // await fetch(`http://localhost:3001/holdings/${userId}`)
                 .then( js => js.json() )
                 .then( holdingsResDB => {
                     if(holdingsResDB.length > 0){
