@@ -2,10 +2,11 @@ import { useState } from "react";
 import styled from 'styled-components';
 
 export default function CreateDate( {handlerDate} ){
+    const today = new Date();
     const initialDate = {
-        day: 1,
-        month: 0,
-        year: 2024,
+        day: today.getDate(),
+        month: today.getMonth(),
+        year: today.getFullYear(),
     };
     const [ newDate, setNewDate ] = useState(initialDate);
     const changing = e => {
