@@ -14,14 +14,12 @@ export function loadHoldingsFromDB (userId) {
         var subPromesas = [];
         try {
             await fetch(`http://${apiUrl}/holdings/${userId}`)
-            // await fetch(`http://localhost:3001/holdings/${userId}`)
                 .then( js => js.json() )
                 .then( holdingsResDB => {
                     if(holdingsResDB.length > 0){
                         holdingsToSend = [...holdingsResDB];
                         holdingsToSend.forEach( hold => {
-                            promesas.push(fetch(`http://localhost:3001/dayprice/${hold.ticker}`))
-                            // promesas.push(fetch(`${apiUrl}/dayprice/${hold.ticker}`))
+                            promesas.push(fetch(`http://${apiUrl}/dayprice/${hold.ticker}`))
                         })
                     }
                 })
@@ -51,9 +49,9 @@ export function loadHoldingsFromDB (userId) {
 
 export function loadUserId ({email, name}) {
     return async function (dispatch) {
-        console.log(apiUrl);
-        console.log(email);
-        console.log(name);
+        // console.log(apiUrl);
+        // console.log(email);
+        // console.log(name);
         const options = {
             method: 'POST',
             body: JSON.stringify({
@@ -66,8 +64,8 @@ export function loadUserId ({email, name}) {
             }
         };
         try {
-            // await fetch(`${apiUrl}/userbyemail`, options)
-            await fetch(`http://localhost:3001/userbyemail`, options)
+            await fetch(`http://${apiUrl}/userbyemail`, options)
+            // await fetch(`http://localhost:3001/userbyemail`, options)
                 .then( js => js.json() )
                 .then( usr => {
                     dispatch({ type: LOAD_USER_ID, payload: usr.id}) 
