@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { loadHoldingsFromDB } from '../redux/holdings/actions'
+import { loadHoldingsFromDB } from '../redux/holdings/actions';
 import CreateDate from './CreateDate';
 
 export default function AddOp () {

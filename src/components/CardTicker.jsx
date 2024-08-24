@@ -1,8 +1,12 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { useSelector, useDispatch } from 'react-redux';
+import { loadHoldingsFromDB } from '../redux/holdings/actions';
 
 export default function CardTicker(props) {
     const { id, date, amount, price, total, buy, exchange, comment } = props.ticker;
+    const state = useSelector( state => state );
+    const dispatch = useDispatch();
     const dateTicker = new Date(date);
     const formattedDate = dateTicker.toLocaleDateString('es-ES', {
         year: 'numeric',
@@ -28,9 +32,26 @@ export default function CardTicker(props) {
             [e.target.name]: e.target.value,
         });
     };
-    const updating = e => {
+    const updating = async e => {
         setEditDisabled(!editDisabled)
         console.log(data);
+        const apiUrl = process.env.REACT_APP_API_URL;
+        // console.log(apiUrl);
+        try {
+            await fetch(`http://${apiUrl}/operations`, {
+                method: 'PUT',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+              })
+                .then(js => js.json())
+                // .then(res => console.log(res))
+                .then( () => dispatch(loadHoldingsFromDB(state.holdings.userId)) )
+                .catch(e => console.error(e));
+        } catch (err) {
+            console.error(err);
+        }
     };
     return (
         <Container>
