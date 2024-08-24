@@ -28,6 +28,10 @@ export default function CardTicker(props) {
             [e.target.name]: e.target.value,
         });
     };
+    const updating = e => {
+        setEditDisabled(!editDisabled)
+        console.log(data);
+    };
     return (
         <Container>
             <Sector><label>Fecha</label> {formattedDate}</Sector>
@@ -60,7 +64,7 @@ export default function CardTicker(props) {
             <Sector>
                 { 
                     editDisabled ? <Btn onClick={()=> setEditDisabled(!editDisabled)}>Editar</Btn>
-                    : <Btn onClick={()=>setEditDisabled(!editDisabled)}>Salvar</Btn>
+                    : <Btn onClick={updating}>Salvar</Btn>
                 }
             </Sector>
             <Sector><Btn onClick={()=>console.log(data)}>Item</Btn></Sector>
@@ -99,4 +103,8 @@ const Btn = styled.button`
         background-color: rgba(8,108,9,0.5);
         color: black;
     }
+`;
+
+const myLabel = styled.label`
+
 `;
