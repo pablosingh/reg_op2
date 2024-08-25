@@ -34,7 +34,13 @@ export default function CardTicker(props) {
     };
     const updating = async e => {
         setEditDisabled(!editDisabled)
-        console.log(data);
+        const toUpdate = {
+            ...data,
+            amount: Number(data.amount),
+            price: Number(data.price),
+            total: Number(data.amount*data.price),
+        }
+        // console.log(toUpdate);
         const apiUrl = process.env.REACT_APP_API_URL;
         // console.log(apiUrl);
         try {
@@ -43,7 +49,7 @@ export default function CardTicker(props) {
                 headers: {
                   'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(data),
+                body: JSON.stringify(toUpdate),
               })
                 .then(js => js.json())
                 // .then(res => console.log(res))
@@ -68,7 +74,7 @@ export default function CardTicker(props) {
             </Sector>
             <Sector>
                 <label>Total </label>
-                <InputData type="number" name="total" value={data.total} disabled={editDisabled}
+                <InputData type="number" name="total" value={data.total} disabled={true}
                 onChange={changing}/>
             </Sector>
             <Sector><label>Estado</label>{buy ? "Compra": "Venta"}</Sector>
