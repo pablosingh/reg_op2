@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { loadHoldingsFromDB } from '../redux/holdings/actions';
 import CreateDate from './CreateDate';
+import BuySellComponent from './BuySellComponent';
 
 export default function AddOp () {
     const initialData = {
@@ -15,10 +16,11 @@ export default function AddOp () {
         exchange: "",
         comment: "",
     }
+    const today = new Date();
     const initialDate = {
-        day: 1,
-        month: 0,
-        year: 2024,
+        day: today.getDate(),
+        month: today.getMonth(),
+        year: today.getFullYear(),
     };
     const [ data, setData ] = useState(initialData);
     const [ buy, setBuy ] = useState(true);
@@ -32,12 +34,11 @@ export default function AddOp () {
             [e.target.name]: e.target.value,
         });
     };
-    const handleBuy = e => {
-        setBuy(e.target.value);
+    const handlerBuy = buyValue => {
+        setBuy(buyValue);
     };
     const handlerDate = ( objDate ) => {
         setMyDate(objDate);
-        // console.log(objDate);
     };
     const addOpsToDB = async (toAdd) => {
         // console.log(toAdd);
@@ -70,7 +71,7 @@ export default function AddOp () {
             total: Number.parseFloat(data.amount)*Number.parseFloat(data.price),
             UserId: state.holdings.userId
         };
-        // console.log(toSend);
+        console.log(toSend);
         addOpsToDB(toSend);
         setData(initialData);
     };
@@ -95,16 +96,7 @@ export default function AddOp () {
                 <InputData type="text" name="price" value={data.price}
                     className="" onChange={changing}/>
             </Sector>
-            <Sector>
-                <label>Compra 
-                    <InputData type="radio" name="buy" value={true} defaultChecked={true}
-                        className="" onChange={handleBuy}/>
-                </label>
-                <label>Venta 
-                    <InputData type="radio" name="buy" value={false}
-                        className="" onChange={handleBuy}/>
-                </label>
-            </Sector>
+            <BuySellComponent handlerBuy={handlerBuy}/>
             <Sector>
                 <label>Exchange</label>
                 <InputData type="text" name="exchange" value={data.exchange}
