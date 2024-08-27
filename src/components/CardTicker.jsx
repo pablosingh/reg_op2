@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from 'react-redux';
 import { loadHoldingsFromDB } from '../redux/holdings/actions';
+import BuySellComponent from "./BuySellComponent";
 
 export default function CardTicker(props) {
     const { id, date, amount, price, total, buy, exchange, comment } = props.ticker;
@@ -26,6 +27,10 @@ export default function CardTicker(props) {
     }
     const [ editDisabled, setEditDisabled ] = useState(true);
     const [ data, setData ] = useState(initialData);
+    const [ buyState, setBuyState ] = useState(buy);
+    const handlerBuy = buyValue => {
+        setBuyState(buyValue);
+    };
     const changing = e => {
         setData({
             ...data,
@@ -77,7 +82,9 @@ export default function CardTicker(props) {
                 <InputData type="number" name="total" value={data.total} disabled={true}
                 onChange={changing}/>
             </Sector>
-            <Sector><label>Estado</label>{buy ? "Compra": "Venta"}</Sector>
+            <Sector><label>Estado</label>
+                <BuySellComponent handlerBuy={handlerBuy} buyInitial={buy} buyDisabled={editDisabled}/>
+            </Sector>
             <Sector>
                 <label>Exchange</label>
                 <InputData type="text" name="exchange" value={data.exchange} disabled={editDisabled}

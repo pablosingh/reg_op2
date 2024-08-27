@@ -14,14 +14,38 @@ export default function CardHolding(props) {
     return (
         <Container>
             <Sector>
-                <Item><label>Fecha Inicial</label> {formattedDate}</Item>
-                <Item><label>Ticker </label>{ticker}</Item>
-                <Item><label>Cantidad </label>{amount}</Item>
-                <Item><label>Precio Promedio </label>{price?.toFixed(2)}</Item>
-                <Item><label>Total </label>{total?.toFixed(2)}</Item>
-                <Item><label>Comentarios </label>{comment}</Item>
-                <Item><label>Precio Actual</label>{actualPrice?.toFixed(2)}</Item>
-                <Item><label>Ganancias </label>{profits?.toFixed(2)}</Item>
+                <Item>
+                    <label>Fecha Inicial</label> 
+                    <SubItem>{formattedDate}</SubItem>
+                </Item>
+                <Item>
+                    <label>Ticker </label>
+                    <SubItem>{ticker}</SubItem>
+                </Item>
+                <Item>
+                    <label>Cantidad </label>
+                    <SubItem>{amount}</SubItem>
+                </Item>
+                <Item>
+                    <label>Precio Promedio </label>
+                    <SubItem>{price?.toFixed(2)}</SubItem>
+                </Item>
+                <Item>
+                    <label>Total </label>
+                    <SubItem>{total?.toFixed(2)}</SubItem>
+                </Item>
+                <Item>
+                    <label>Comentarios </label>
+                    <SubItem>{comment}</SubItem>
+                </Item>
+                <Item>
+                    <label>Precio Actual</label>
+                    <SubItem>{actualPrice?.toFixed(2)}</SubItem>
+                </Item>
+                <Item>
+                    <label>Ganancias </label>
+                    <SubItem>{profits?.toFixed(2)}</SubItem>
+                </Item>
                 <Btn onClick={()=> setShowOps(!showOps)}>Operaciones</Btn>
                 {/* <Btn onClick={()=> console.log(props)}>Props</Btn> */}
             </Sector>
@@ -67,6 +91,18 @@ const Item = styled.div`
     border: 2px solid #333;
     margin: 0.1em;
     padding: 0.1em;
+    border-radius: 0.5em;
+    justify-content: flex-start;
+    // align-items: center;
+`;
+const SubItem = styled.div`
+    color: black;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(22,130,107,255);
+    // border: 2px solid #333;
+    margin: 0.1em;
+    padding: 0.3em;
     border-radius: 0.5em;
 `;
 
