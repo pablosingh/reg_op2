@@ -96,7 +96,7 @@ export default function AddOp () {
                 <InputData type="text" name="price" value={data.price}
                     className="" onChange={changing}/>
             </Sector>
-            <BuySellComponent handlerBuy={handlerBuy}/>
+            <BuySellComponent handlerBuy={handlerBuy} buyInitial={buy} buyDisabled={false}/>
             <Sector>
                 <label>Exchange</label>
                 <InputData type="text" name="exchange" value={data.exchange}
