@@ -43,7 +43,7 @@ export default function AddOp () {
     const addOpsToDB = async (toAdd) => {
         // console.log(toAdd);
         const apiUrl = process.env.REACT_APP_API_URL;
-        console.log(apiUrl);
+        // console.log(apiUrl);
         try {
             await fetch(`http://${apiUrl}/operations`, {
                 method: 'POST',
@@ -58,8 +58,8 @@ export default function AddOp () {
                 .catch(e => console.error(e));
         } catch (err) {
             console.error(err);
-        }
-    }
+        };
+    };
     const sending = e => {
         const dateTicker = new Date(myDate.year, myDate.month, myDate.day);
         const toSend = {
@@ -80,38 +80,40 @@ export default function AddOp () {
     // }, []);
     return(
         <Container>
-            <CreateDate handlerDate={handlerDate}/>
-            <Sector>
-                <label>Ticker</label>
-                <InputData type="text" name="ticker" value={data.ticker}
-                    className="" onChange={changing}/>
-            </Sector>
-            <Sector>
-                <label>Cantidad</label>
-                <InputData type="text" name="amount" value={data.amount}
-                    className="" onChange={changing}/>
-            </Sector>
-            <Sector>
-                <label>Precio</label>
-                <InputData type="text" name="price" value={data.price}
-                    className="" onChange={changing}/>
-            </Sector>
-            <BuySellComponent handlerBuy={handlerBuy} buyInitial={buy} buyDisabled={false}/>
-            <Sector>
-                <label>Exchange</label>
-                <InputData type="text" name="exchange" value={data.exchange}
-                    className="" onChange={changing}/>
-            </Sector>
-            <Sector>
-                <label>Comentarios</label>
-                <InputData type="text" name="comment" value={data.comment}
-                    className="" onChange={changing}/>
-            </Sector>
-            <Sector>
-                <Btn onClick={sending}>Agregar</Btn>
-                <Btn onClick={()=> console.log(state)}>Estado</Btn>
-                <Btn onClick={()=> console.log(buy)}>buy</Btn>
-            </Sector>
+            <SubContainer>
+                <CreateDate handlerDate={handlerDate}/>
+                <Sector>
+                    <label>Ticker</label>
+                    <InputData type="text" name="ticker" value={data.ticker}
+                        className="" onChange={changing}/>
+                </Sector>
+                <Sector>
+                    <label>Cantidad</label>
+                    <InputData type="text" name="amount" value={data.amount}
+                        className="" onChange={changing}/>
+                </Sector>
+                <Sector>
+                    <label>Precio</label>
+                    <InputData type="text" name="price" value={data.price}
+                        className="" onChange={changing}/>
+                </Sector>
+                <BuySellComponent handlerBuy={handlerBuy} buyInitial={buy} buyDisabled={false}/>
+                <Sector>
+                    <label>Exchange</label>
+                    <InputData type="text" name="exchange" value={data.exchange}
+                        className="" onChange={changing}/>
+                </Sector>
+                <Sector>
+                    <label>Comentarios</label>
+                    <InputData type="text" name="comment" value={data.comment}
+                        className="" onChange={changing}/>
+                </Sector>
+                <Sector>
+                    <Btn onClick={sending}>Agregar</Btn>
+                    <Btn onClick={()=> console.log(state)}>Estado</Btn>
+                    <Btn onClick={()=> console.log(buy)}>buy</Btn>
+                </Sector>
+            </SubContainer>
         </Container>
     );
 };
@@ -126,6 +128,19 @@ const Container = styled.div`
     align-items: center;
     justify-content: center;
     // border: 2px solid #333;
+`;
+
+const SubContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    // min-height: 80vh;
+    // background-color: rgba(220,130,17,255);
+    margin: 0em;
+    padding: 1em;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #333;
+    border-radius: 2em;
 `;
 const Sector = styled.div`
     // background-color: rgba(220,130,17,255);

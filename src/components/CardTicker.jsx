@@ -44,7 +44,9 @@ export default function CardTicker(props) {
             amount: Number(data.amount),
             price: Number(data.price),
             total: Number(data.amount*data.price),
-        }
+            buy: buyState
+        };
+        setData(toUpdate);
         // console.log(toUpdate);
         const apiUrl = process.env.REACT_APP_API_URL;
         // console.log(apiUrl);
@@ -69,31 +71,41 @@ export default function CardTicker(props) {
             <Sector><label>Fecha</label> {formattedDate}</Sector>
             <Sector>
                 <label>Cantidad </label>
-                <InputData type="number" name="amount" value={data.amount} disabled={editDisabled}
-                onChange={changing}/>
+                { editDisabled ? <label>{data.amount}</label> : 
+                    <InputData type="number" name="amount" value={data.amount} disabled={editDisabled}
+                    onChange={changing}/>
+                }
             </Sector>
             <Sector>
                 <label>Precio </label>
-                <InputData type="number" name="price" value={data.price} disabled={editDisabled}
-                onChange={changing}/>
+                { editDisabled ? <label>{data.price}</label> : 
+                    <InputData type="number" name="price" value={data.price} disabled={editDisabled}
+                    onChange={changing}/>
+                }
             </Sector>
             <Sector>
                 <label>Total </label>
-                <InputData type="number" name="total" value={data.total} disabled={true}
-                onChange={changing}/>
+                { editDisabled ? <label>{data.total}</label> : 
+                    <InputData type="number" name="total" value={data.total} disabled={true}
+                    onChange={changing}/>
+                }
             </Sector>
             <Sector><label>Estado</label>
                 <BuySellComponent handlerBuy={handlerBuy} buyInitial={buy} buyDisabled={editDisabled}/>
             </Sector>
             <Sector>
                 <label>Exchange</label>
-                <InputData type="text" name="exchange" value={data.exchange} disabled={editDisabled}
-                onChange={changing}/>
+                { editDisabled ? <label>{data.exchange}</label> : 
+                    <InputData type="text" name="exchange" value={data.exchange} disabled={editDisabled}
+                    onChange={changing}/>
+                }
             </Sector>
             <Sector>
                 <label>Comentarios</label>
-                <InputData type="text" name="comment" value={data.comment} disabled={editDisabled}
-                onChange={changing}/>
+                { editDisabled ? <label>{data.comment}</label> : 
+                    <InputData type="text" name="comment" value={data.comment} disabled={editDisabled}
+                    onChange={changing}/>
+                }
             </Sector>
             <Sector>
                 { 
@@ -139,6 +151,6 @@ const Btn = styled.button`
     }
 `;
 
-const myLabel = styled.label`
+// const myLabel = styled.label`
 
-`;
+// `;

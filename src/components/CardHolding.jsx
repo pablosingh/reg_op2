@@ -1,16 +1,50 @@
 import styled from "styled-components";
 import CardTicker from "./CardTicker";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loadHoldingsFromDB } from '../redux/holdings/actions';
 
 export default function CardHolding(props) {
+    const { id, date, ticker, amount, price, total, comment, actualPrice, profits, Operations } = props.ticker;
     const [showOps, setShowOps] = useState(false);
-    const { date, ticker, amount, price, total, comment, actualPrice, profits, Operations } = props.ticker;
+    const dispatch = useDispatch();
+    const state = useSelector(state => state);
+    const [ editDisabled, setEditDisabled ] = useState(true);
+    const [ commentState, setCommentState ] = useState(comment+"");
     const dateTicker = new Date(date);
     const formattedDate = dateTicker.toLocaleDateString('es-ES', {
         day: '2-digit',
         month: '2-digit',
         year: 'numeric',
     });
+    
+    const editComment = e => {
+        setCommentState(e.target.value);
+    };
+    const updatingComment = async e => {
+        setEditDisabled(!editDisabled);
+        console.log(commentState);
+        // PUT apiUrl
+        const apiUrl = process.env.REACT_APP_API_URL;
+        try {
+            await fetch(`http://${apiUrl}/holdings`, {
+                method: 'PUT',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    id,
+                    comment: commentState
+                }),
+              })
+                .then(js => js.json())
+                // .then(res => console.log(res))
+                .then( () => dispatch(loadHoldingsFromDB(state.holdings.userId)) )
+                .catch(e => console.error(e));
+        } catch (err) {
+            console.error(err);
+        };
+    };
     return (
         <Container>
             <Sector>
@@ -36,7 +70,16 @@ export default function CardHolding(props) {
                 </Item>
                 <Item>
                     <label>Comentarios </label>
-                    <SubItem>{comment}</SubItem>
+                    { editDisabled ? <SubItem>
+                            {comment}
+                            <Btn onClick={()=> setEditDisabled(!editDisabled)}>Editar</Btn>
+                        </SubItem>
+                        : 
+                        <>
+                            <InputData type="text" name="comment" value={commentState} disabled={editDisabled}
+                            onChange={editComment}/>
+                            <Btn onClick={updatingComment}>Salvar</Btn>
+                        </>}
                 </Item>
                 <Item>
                     <label>Precio Actual</label>
@@ -117,4 +160,8 @@ const Btn = styled.button`
         background-color: rgba(8,108,9,0.5);
         color: black;
     }
+`;
+
+const InputData = styled.input`
+    max-width: 7vw;
 `;
