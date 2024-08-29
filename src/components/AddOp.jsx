@@ -44,7 +44,7 @@ export default function AddOp () {
         // console.log(toAdd);
         const apiUrl = process.env.REACT_APP_API_URL;
         try {
-            await fetch(`${apiUrl}/operations`, {
+            await fetch(`${apiUrl}operations`, {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',

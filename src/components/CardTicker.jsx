@@ -51,7 +51,7 @@ export default function CardTicker(props) {
         const apiUrl = process.env.REACT_APP_API_URL;
         // console.log(apiUrl);
         try {
-            await fetch(`${apiUrl}/operations`, {
+            await fetch(`${apiUrl}operations`, {
                 method: 'PUT',
                 headers: {
                   'Content-Type': 'application/json',
