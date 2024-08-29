@@ -27,7 +27,7 @@ export default function CardHolding(props) {
         // PUT apiUrl
         const apiUrl = process.env.REACT_APP_API_URL;
         try {
-            await fetch(`http://${apiUrl}/holdings`, {
+            await fetch(`${apiUrl}/holdings`, {
                 method: 'PUT',
                 headers: {
                   'Content-Type': 'application/json',

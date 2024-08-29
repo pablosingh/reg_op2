@@ -12,28 +12,7 @@ import { Route, Routes } from 'react-router-dom';
 export default function Body () {
     const dispatch = useDispatch();
     const { user } = useAuth0();
-    // const state = useSelector( state => state );
-    // const initUser = async (user) => {
-    //     try {
-    //         await fetch('http://localhost:3001/userbyemail', {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //                 // Otros encabezados necesarios según la API (por ejemplo, tokens de autorización)
-    //             },
-    //             mode: 'cors', // Modo CORS
-    //             body: JSON.stringify({
-    //                 email: user.email
-    //             })
-    //         })
-    //         .then( js => js.json() )
-    //         .then( res => console.log(res) )
-    //         .catch( e => console.error(e) );
-    //     } catch (error) {
-    //         console.error(error);
-    //     };
-    // };
-    useEffect ( ()=> {
+        useEffect ( ()=> {
         dispatch(loadUserId(user))
     }, []);
     return (
