@@ -28,13 +28,11 @@ export default function Body () {
 };
 
 const Container = styled.div`
-    min-height: 100vh;
-    flex-wrap: wrap;
-    max-width: 100vw;
-    display: flex;
-    flex-direction: column;
-    // background-color: rgba(108,8,9,1);
-    justify-content: center;
+    position: relative;
+    top: 20vh;
+    right: 0;
+    width: 100vw;
+    min-height: 80vh;
     padding: 0em 0em;
-    margin: 0em;
+    margin: 0em 0em;
 `;

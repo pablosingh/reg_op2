@@ -23,15 +23,18 @@ export default function Head () {
 };
 
 const Container = styled.div`
-    display: flex;
-    // flex-direction: column;
-    background-color: rgba(220,130,17,255);
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    width: 100vw;
     height: 20vh;
     margin: 0em;
     padding: 0em;
-    align-items: center;
+    background-color: rgba(220,130,17,255);
+    display: flex;
     justify-content: space-around;
-    // border: 2px solid #333;
+    align-items: center;
     .link_btn{
         background-color: rgba(8,108,9,1);
         color: white;
@@ -49,7 +52,6 @@ const Container = styled.div`
 
 const Sector = styled.div`
     display: flex;
-    // flex-direction: column;
     background-color: rgba(220,130,17,255);
     height: 20vh;
     margin: 0em;

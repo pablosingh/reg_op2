@@ -15,10 +15,15 @@ export default function Holding() {
 };
 
 const Container = styled.div`
+    // position: fixed;
+    top: 20vh;
+    right: 0;
+    width: 100vw;
+    min-height: 80vh;
+
     display: flex;
     flex-direction: column;
     min-height: 80vh;
-    min-width: 50vw;
     padding: 0em 0em;
     margin: 0em 0em;
 `;

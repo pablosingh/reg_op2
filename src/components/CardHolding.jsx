@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadHoldingsFromDB } from '../redux/holdings/actions';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import { Button } from '@mui/material';
 
 export default function CardHolding(props) {
@@ -22,8 +23,10 @@ export default function CardHolding(props) {
     
     const editComment = e => {
         setCommentState(e.target.value);
+        e.stopPropagation();
     };
     const updatingComment = async e => {
+        e.stopPropagation();
         setEditDisabled(!editDisabled);
         console.log(commentState);
         // PUT apiUrl
@@ -49,30 +52,26 @@ export default function CardHolding(props) {
     };
     return (
         <Container>
-            <Sector>
+            <Sector onClick={()=> setShowOps(!showOps)}>
                 <Item>
-                    {/* <label>Fecha Inicial Ticker </label> */}
                     <SubItem>{formattedDate}</SubItem>
                 </Item>
-                {/* <Item>
-                    <label>Ticker </label>
-                    <SubItem>{ticker}</SubItem>
-                </Item> */}
                 <Item>
-                    {/* <label>Cantidad </label> */}
+                    <label>{ticker} </label>
                     <SubItem>{amount} {ticker} x ${price?.toFixed(2)}</SubItem>
                 </Item>
-                {/* <Item> */}
-                    {/* <label>Precio Promedio </label> */}
-                    {/* <SubItem>{price?.toFixed(2)} USDT</SubItem> */}
-                {/* </Item> */}
                 <Item>
                     <label>Total </label>
                     <SubItem>${total?.toFixed(2)}</SubItem>
                 </Item>
                 { editDisabled ? 
                     <Item><label>Comentarios
-                        <Btn onClick={()=> setEditDisabled(!editDisabled)}>Editar</Btn>
+                        <Btn onClick={ e => {
+                            e.stopPropagation();
+                            setEditDisabled(!editDisabled);
+                            }}>
+                            <BorderColorOutlinedIcon sx={{ fontSize: 12 }}/>
+                        </Btn>
                     </label>
                         <SubItem>{comment}</SubItem>
                     </Item>
@@ -81,6 +80,7 @@ export default function CardHolding(props) {
                         <Btn onClick={updatingComment}>Salvar</Btn>
                         </label>
                         <InputData type="text" name="comment" value={commentState} disabled={editDisabled}
+                        onClick={e => e.stopPropagation() }
                         onChange={editComment}/>
                     </Item>
                 }
@@ -92,11 +92,21 @@ export default function CardHolding(props) {
                     <label>Ganancias </label>
                     <SubItem>${profits?.toFixed(2)}</SubItem>
                 </Item>
-                <Button variant="contained" 
+                {/* <Button variant="contained" 
                     color="primary" endIcon={<ArrowDownwardIcon />}
                     onClick={()=> setShowOps(!showOps)}
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center', // Centra el contenido horizontalmente
+                        textAlign: 'center',      // Alinea el texto en el centro
+                      }}
                     className="myButton">
-                </Button>
+                </Button> */}
+                <button className="myButton"
+                    onClick={()=> setShowOps(!showOps)}>
+                    <ArrowDownwardIcon />
+                </button>
             </Sector>
             
             { showOps ? 
@@ -117,9 +127,12 @@ const Container = styled.div`
     border-radius: 5em;
     .myButton{
         margin: 0em 0.3em;
+        padding: 0.1em 0.5em;
         display: flex;
         justify-content: center;
         align-items: center;
+        border-radius: 5em;
+        border: none;
     }
 `;
 
@@ -130,6 +143,7 @@ const Sector = styled.div`
     margin: 0.01em 0.5em 0em 0.5em;
     // padding: 0.05em;
     border-radius: 0.5em;
+    flex-wrap: wrap;
 `;
 const DivOps = styled.div`
     color: black;
@@ -139,12 +153,14 @@ const DivOps = styled.div`
     margin: 0.1em;
     padding: 0.1em;
     border-radius: 0.5em;
+    flex-wrap: wrap;
 `;
 const Item = styled.div`
     color: black;
     display: flex;
     flex-direction: column;
-    border: 2px solid #333;
+    flex-wrap: wrap;
+    background-color: rgba(100,150,70,255);
     margin: 0.1em;
     padding: 0.1em;
     border-radius: 0.5em;
@@ -161,6 +177,7 @@ const SubItem = styled.div`
     margin: 0.1em;
     padding: 0.3em;
     border-radius: 0.5em;
+    flex-wrap: wrap;
 `;
 
 const Btn = styled.button`
