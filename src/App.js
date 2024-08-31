@@ -11,3 +11,9 @@ function App() {
 };
 
 export default App;
+
+// Archivos donde hay url para el deploy
+// AddOp
+// CardHolding
+// CardTicker
+// redux/holdings/actions

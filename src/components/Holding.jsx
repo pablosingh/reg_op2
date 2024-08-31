@@ -7,7 +7,8 @@ export default function Holding() {
     const state = useSelector( state => state?.holdings.holdings );
     return (
         <Container>
-            <Btn onClick={()=> console.log(state)}>Estado</Btn>
+            {/* <Btn onClick={()=> console.log(state)}>Estado</Btn> */}
+            {/* <Btn onClick={()=> console.log(process.env.REACT_APP_API_URL)}>URL</Btn> */}
             {hol && hol.map( t => <CardHolding ticker={t} key={t.id}/> )}
         </Container>
     );
@@ -18,8 +19,8 @@ const Container = styled.div`
     flex-direction: column;
     min-height: 80vh;
     min-width: 50vw;
-    padding: 0.9em 0em;
-    margin: 0em;
+    padding: 0em 0em;
+    margin: 0em 0em;
 `;
 
 const Btn = styled.button`

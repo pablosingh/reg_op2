@@ -33,7 +33,7 @@ const Container = styled.div`
     max-width: 100vw;
     display: flex;
     flex-direction: column;
-    background-color: #e5e5e5;
+    // background-color: rgba(108,8,9,1);
     justify-content: center;
     padding: 0em 0em;
     margin: 0em;

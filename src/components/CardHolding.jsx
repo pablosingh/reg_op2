@@ -3,6 +3,8 @@ import CardTicker from "./CardTicker";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadHoldingsFromDB } from '../redux/holdings/actions';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import { Button } from '@mui/material';
 
 export default function CardHolding(props) {
     const { id, date, ticker, amount, price, total, comment, actualPrice, profits, Operations } = props.ticker;
@@ -49,48 +51,52 @@ export default function CardHolding(props) {
         <Container>
             <Sector>
                 <Item>
-                    <label>Fecha Inicial</label> 
+                    {/* <label>Fecha Inicial Ticker </label> */}
                     <SubItem>{formattedDate}</SubItem>
                 </Item>
-                <Item>
+                {/* <Item>
                     <label>Ticker </label>
                     <SubItem>{ticker}</SubItem>
-                </Item>
+                </Item> */}
                 <Item>
-                    <label>Cantidad </label>
-                    <SubItem>{amount}</SubItem>
+                    {/* <label>Cantidad </label> */}
+                    <SubItem>{amount} {ticker} x ${price?.toFixed(2)}</SubItem>
                 </Item>
-                <Item>
-                    <label>Precio Promedio </label>
-                    <SubItem>{price?.toFixed(2)}</SubItem>
-                </Item>
+                {/* <Item> */}
+                    {/* <label>Precio Promedio </label> */}
+                    {/* <SubItem>{price?.toFixed(2)} USDT</SubItem> */}
+                {/* </Item> */}
                 <Item>
                     <label>Total </label>
-                    <SubItem>{total?.toFixed(2)}</SubItem>
+                    <SubItem>${total?.toFixed(2)}</SubItem>
                 </Item>
-                <Item>
-                    <label>Comentarios </label>
-                    { editDisabled ? <SubItem>
-                            {comment}
-                            <Btn onClick={()=> setEditDisabled(!editDisabled)}>Editar</Btn>
-                        </SubItem>
-                        : 
-                        <>
-                            <InputData type="text" name="comment" value={commentState} disabled={editDisabled}
-                            onChange={editComment}/>
-                            <Btn onClick={updatingComment}>Salvar</Btn>
-                        </>}
-                </Item>
+                { editDisabled ? 
+                    <Item><label>Comentarios
+                        <Btn onClick={()=> setEditDisabled(!editDisabled)}>Editar</Btn>
+                    </label>
+                        <SubItem>{comment}</SubItem>
+                    </Item>
+                : 
+                    <Item><label>Comentarios
+                        <Btn onClick={updatingComment}>Salvar</Btn>
+                        </label>
+                        <InputData type="text" name="comment" value={commentState} disabled={editDisabled}
+                        onChange={editComment}/>
+                    </Item>
+                }
                 <Item>
                     <label>Precio Actual</label>
-                    <SubItem>{actualPrice?.toFixed(2)}</SubItem>
+                    <SubItem>${actualPrice?.toFixed(2)}</SubItem>
                 </Item>
                 <Item>
                     <label>Ganancias </label>
-                    <SubItem>{profits?.toFixed(2)}</SubItem>
+                    <SubItem>${profits?.toFixed(2)}</SubItem>
                 </Item>
-                <Btn onClick={()=> setShowOps(!showOps)}>Operaciones</Btn>
-                {/* <Btn onClick={()=> console.log(props)}>Props</Btn> */}
+                <Button variant="contained" 
+                    color="primary" endIcon={<ArrowDownwardIcon />}
+                    onClick={()=> setShowOps(!showOps)}
+                    className="myButton">
+                </Button>
             </Sector>
             
             { showOps ? 
@@ -106,8 +112,15 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     background-color: rgba(22,130,177,255);
-    margin: 0;
-    padding: 0;
+    margin: 0.5em 0.5em 0em 0.5em;
+    padding: 1em 2em;
+    border-radius: 5em;
+    .myButton{
+        margin: 0em 0.3em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 `;
 
 const Sector = styled.div`
@@ -135,7 +148,8 @@ const Item = styled.div`
     margin: 0.1em;
     padding: 0.1em;
     border-radius: 0.5em;
-    justify-content: flex-start;
+    // justify-content: flex-start;
+    justify-content: center;
     // align-items: center;
 `;
 const SubItem = styled.div`
@@ -154,7 +168,7 @@ const Btn = styled.button`
     color: white;
     border-radius: 1em;
     padding: 0.2em 1em;
-    margin: 1em;
+    margin: 0.3em;
     transition: all .4s ease;
     &:hover{
         background-color: rgba(8,108,9,0.5);
