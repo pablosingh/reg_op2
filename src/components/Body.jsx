@@ -8,6 +8,7 @@ import Profile from './Profile';
 import { useAuth0 } from '@auth0/auth0-react';
 import Head from './Head';
 import { Route, Routes } from 'react-router-dom';
+import { secondaryColor } from '../styles/colors';
 
 export default function Body () {
     const dispatch = useDispatch();
@@ -35,4 +36,5 @@ const Container = styled.div`
     min-height: 80vh;
     padding: 0em 0em;
     margin: 0em 0em;
+    background-color: ${secondaryColor};
 `;

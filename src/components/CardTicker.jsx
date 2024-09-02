@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from 'react-redux';
 import { loadHoldingsFromDB } from '../redux/holdings/actions';
 import BuySellComponent from "./BuySellComponent";
+import { secondaryColor } from "../styles/colors";
 
 export default function CardTicker(props) {
     const { id, date, amount, price, total, buy, exchange, comment } = props.ticker;
@@ -120,7 +121,7 @@ export default function CardTicker(props) {
 
 const Container = styled.div`
     display: flex;
-    background-color: rgba(180,230,237,255);
+    background-color: ${secondaryColor};
     // margin: 0.5em;
     // padding: 0.1em;
     border-radius: 0.5em;

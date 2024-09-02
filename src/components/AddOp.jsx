@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { loadHoldingsFromDB } from '../redux/holdings/actions';
 import CreateDate from './CreateDate';
 import BuySellComponent from './BuySellComponent';
+import { tertiaryColor, tertiaryHoverColor } from "../styles/colors";
 
 export default function AddOp () {
     const initialData = {
@@ -121,19 +122,15 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     min-height: 80vh;
-    // background-color: rgba(220,130,17,255);
     margin: 0em;
     padding: 0em;
     align-items: center;
     justify-content: center;
-    // border: 2px solid #333;
 `;
 
 const SubContainer = styled.div`
     display: flex;
     flex-direction: column;
-    // min-height: 80vh;
-    // background-color: rgba(220,130,17,255);
     margin: 0em;
     padding: 1em;
     align-items: center;
@@ -157,14 +154,14 @@ const InputData = styled.input`
     margin: 0.2em 0em 0em 0.7em;
 `;
 const Btn = styled.button`
-    background-color: rgba(8,108,9,1);
+    background-color: ${tertiaryColor};
     color: white;
     border-radius: 1em;
     padding: 0.2em 1em;
     margin: 0.3em;
     transition: all .4s ease;
     &:hover{
-        background-color: rgba(8,108,9,0.5);
+        background-color: ${tertiaryHoverColor};
         color: black;
     }
 `;

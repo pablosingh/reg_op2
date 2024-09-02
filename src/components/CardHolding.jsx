@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadHoldingsFromDB } from '../redux/holdings/actions';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
-import { Button } from '@mui/material';
+import { primaryColor, tertiaryColor, tertiaryHoverColor } from "../styles/colors";
 
 export default function CardHolding(props) {
     const { id, date, ticker, amount, price, total, comment, actualPrice, profits, Operations } = props.ticker;
@@ -121,7 +121,7 @@ export default function CardHolding(props) {
 const Container = styled.div`
     display: flex;
     flex-direction: column;
-    background-color: rgba(22,130,177,255);
+    background-color: ${primaryColor};
     margin: 0.5em 0.5em 0em 0.5em;
     padding: 1em 2em;
     border-radius: 5em;
@@ -133,6 +133,12 @@ const Container = styled.div`
         align-items: center;
         border-radius: 5em;
         border: none;
+        background-color: ${tertiaryColor};
+        transition: all .4s ease;
+        &:hover{
+            background-color: ${tertiaryHoverColor};
+            color: black;
+        }
     }
 `;
 
@@ -181,14 +187,14 @@ const SubItem = styled.div`
 `;
 
 const Btn = styled.button`
-    background-color: rgba(8,108,9,1);
+    background-color: ${tertiaryColor};
     color: white;
     border-radius: 1em;
     padding: 0.2em 1em;
     margin: 0.3em;
     transition: all .4s ease;
     &:hover{
-        background-color: rgba(8,108,9,0.5);
+        background-color: ${tertiaryHoverColor};
         color: black;
     }
 `;

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import LogoutButton from './LogoutButton';
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
+import { primaryColor, tertiaryColor, tertiaryHoverColor } from "../styles/colors";
 
 export default function Head () {
     const { user } = useAuth0();
@@ -31,12 +32,12 @@ const Container = styled.div`
     height: 20vh;
     margin: 0em;
     padding: 0em;
-    background-color: rgba(220,130,17,255);
+    background-color: ${primaryColor};
     display: flex;
     justify-content: space-around;
     align-items: center;
     .link_btn{
-        background-color: rgba(8,108,9,1);
+        background-color: ${tertiaryColor};
         color: white;
         border-radius: 1em;
         padding: 0.2em 1em;
@@ -44,7 +45,7 @@ const Container = styled.div`
         transition: all .4s ease;
         text-decoration: none;
         &:hover{
-            background-color: rgba(8,108,9,0.5);
+            background-color: ${tertiaryHoverColor};
             color: black;
         }
     }
@@ -52,7 +53,6 @@ const Container = styled.div`
 
 const Sector = styled.div`
     display: flex;
-    background-color: rgba(220,130,17,255);
     height: 20vh;
     margin: 0em;
     padding: 0em;
