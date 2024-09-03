@@ -37,4 +37,8 @@ const Container = styled.div`
     padding: 0em 0em;
     margin: 0em 0em;
     background-color: ${secondaryColor};
+    @media(max-width: 768px){
+        // position: relative;
+        top: 0vh;
+    }
 `;
