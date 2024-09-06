@@ -3,13 +3,13 @@ import LogoutButton from './LogoutButton';
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
 import { primaryColor, tertiaryColor, tertiaryHoverColor } from "../styles/colors";
-import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
+import MobileMenu from "./MobileMenu";
 
 export default function Head () {
     const { user } = useAuth0();
     return (
     <>
-        <MobileBtn><MenuRoundedIcon/></MobileBtn>
+        <MobileMenu/>
         <Container>
             <Sector>
                 <img src={user.picture} alt={user.name} className="img_class" />
@@ -70,25 +70,5 @@ const Sector = styled.div`
     }
     .img_class{
       border-radius: 50%;
-    }
-`;
-
-const MobileBtn = styled.button`
-    margin: 0.1em;
-    padding: 0.3em 0.5em;
-    position: fixed;
-    border: none;
-    border-radius: 3em;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    background-color: ${tertiaryColor};
-    transition: all .4s ease;
-    &:hover{
-        background-color: ${tertiaryHoverColor};
-        color: black;
-    }
-    @media(min-width: 768px){
-        display: none;
     }
 `;
