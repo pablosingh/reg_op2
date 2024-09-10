@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { loadHoldingsFromDB } from '../redux/holdings/actions';
 import CreateDate from './CreateDate';
 import BuySellComponent from './BuySellComponent';
-import { tertiaryColor, tertiaryHoverColor } from "../styles/colors";
+import { secondaryColor, tertiaryColor, tertiaryHoverColor } from "../styles/colors";
 
 export default function AddOp () {
     const initialData = {
@@ -137,10 +137,9 @@ const SubContainer = styled.div`
     justify-content: center;
     border: 2px solid #333;
     border-radius: 2em;
+    background-color: ${secondaryColor};
 `;
 const Sector = styled.div`
-    // background-color: rgba(220,130,17,255);
-    // max-width: 25vw;
     color: black;
     display: flex;
     // border: 2px solid #333;

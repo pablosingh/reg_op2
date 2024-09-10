@@ -9,6 +9,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import Head from './Head';
 import { Route, Routes } from 'react-router-dom';
 import { secondaryColor } from '../styles/colors';
+import image from '../images/bitcoin.jpg';
 
 export default function Body () {
     const dispatch = useDispatch();
@@ -36,9 +37,21 @@ const Container = styled.div`
     min-height: 80vh;
     padding: 0em 0em;
     margin: 0em 0em;
-    background-color: ${secondaryColor};
+    // background-color: ${secondaryColor};
     @media(max-width: 768px){
         // position: relative;
         top: 0vh;
+    }
+    &::before{
+        content: '';
+        position: fixed;
+        top: 0vh;
+        left: 0vw;
+        width: 100vw;
+        height: 100vh;
+        background-repeat: repeat-y;
+        background: url(${image});
+        opacity: 0.9;
+        z-index: -1;
     }
 `;

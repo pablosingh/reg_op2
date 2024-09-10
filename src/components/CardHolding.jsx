@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadHoldingsFromDB } from '../redux/holdings/actions';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
-import { primaryColor, tertiaryColor, tertiaryHoverColor } from "../styles/colors";
+import { ItemHoldingColor, primaryColor, tertiaryColor, tertiaryHoverColor } from "../styles/colors";
 
 export default function CardHolding(props) {
     const { id, date, ticker, amount, price, total, comment, actualPrice, profits, Operations } = props.ticker;
@@ -121,11 +121,16 @@ export default function CardHolding(props) {
 const Container = styled.div`
     display: flex;
     flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: fit-content;
     background-color: ${primaryColor};
     margin: 0.5em 0.5em 0em 0.5em;
     padding: 1em 2em;
     border-radius: 5em;
     .myButton{
+        color: white;
         margin: 0em 0.3em;
         padding: 0.1em 0.5em;
         display: flex;
@@ -155,7 +160,6 @@ const DivOps = styled.div`
     color: black;
     display: flex;
     flex-direction: column;
-    border: 2px solid #333;
     margin: 0.1em;
     padding: 0.1em;
     border-radius: 0.5em;
@@ -166,7 +170,7 @@ const Item = styled.div`
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    background-color: rgba(100,150,70,255);
+    background-color: ${ItemHoldingColor};
     margin: 0.1em;
     padding: 0.1em;
     border-radius: 0.5em;

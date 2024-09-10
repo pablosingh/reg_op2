@@ -114,7 +114,7 @@ export default function CardTicker(props) {
                     : <Btn onClick={updating}>Salvar</Btn>
                 }
             </Sector>
-            <Sector><Btn onClick={()=>console.log(data)}>Item</Btn></Sector>
+            {/* <Sector><Btn onClick={()=>console.log(data)}>Item</Btn></Sector> */}
         </Container>
     );
 };
@@ -122,9 +122,11 @@ export default function CardTicker(props) {
 const Container = styled.div`
     display: flex;
     background-color: ${secondaryColor};
+    justify-content: flex-start;
     // margin: 0.5em;
     // padding: 0.1em;
     border-radius: 0.5em;
+    flex-wrap: wrap;
 `;
 const InputData = styled.input`
     max-width: 7vw;
