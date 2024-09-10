@@ -110,8 +110,8 @@ export default function AddOp () {
                 </Sector>
                 <Sector>
                     <Btn onClick={sending}>Agregar</Btn>
-                    <Btn onClick={()=> console.log(state)}>Estado</Btn>
-                    <Btn onClick={()=> console.log(buy)}>buy</Btn>
+                    {/* <Btn onClick={()=> console.log(state)}>Estado</Btn>
+                    <Btn onClick={()=> console.log(buy)}>buy</Btn> */}
                 </Sector>
             </SubContainer>
         </Container>

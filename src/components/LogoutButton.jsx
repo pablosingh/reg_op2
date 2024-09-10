@@ -13,7 +13,7 @@ export default function LogoutButton () {
   );
 };
 
-const Btn = styled.button`
+const Btn = styled.div`
     background-color: ${tertiaryColor};
     color: white;
     border-radius: 1em;

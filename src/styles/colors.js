@@ -10,4 +10,4 @@ export const tertiaryColor = 'black';
 // export const tertiaryHoverColor = 'rgba(24,245,12,0.5)';
 export const tertiaryHoverColor = 'gray';
 
-export const ItemHoldingColor = 'rgba(248, 252, 120,255)'
+export const ItemHoldingColor = 'rgba(255, 252, 200,255)'

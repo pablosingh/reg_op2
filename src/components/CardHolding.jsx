@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadHoldingsFromDB } from '../redux/holdings/actions';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
-import { ItemHoldingColor, primaryColor, tertiaryColor, tertiaryHoverColor } from "../styles/colors";
+import { ItemHoldingColor, primaryColor, 
+    secondaryColor, tertiaryColor, tertiaryHoverColor } from "../styles/colors";
 
 export default function CardHolding(props) {
     const { id, date, ticker, amount, price, total, comment, actualPrice, profits, Operations } = props.ticker;
@@ -182,7 +183,7 @@ const SubItem = styled.div`
     color: black;
     display: flex;
     flex-direction: column;
-    background-color: rgba(22,130,107,255);
+    background-color: ${secondaryColor};
     // border: 2px solid #333;
     margin: 0.1em;
     padding: 0.3em;
