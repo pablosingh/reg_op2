@@ -1,77 +1,53 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
-import { tertiaryColor, tertiaryHoverColor } from "../styles/colors";
-import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import { Link } from 'react-router-dom';
+import BurguerButton from './BurguerButton';
+import { primaryColor } from '../styles/colors';
 
 export default function MobileMenu() {
     const [ openMenu, setOpenMenu ] = useState(false);
+    const handleClick = () => setOpenMenu(!openMenu);
     return (
         <>
-            { openMenu ? 
-            <MenuContainer>
-                <MobileBtn onClick={()=> setOpenMenu(!openMenu)}>
-                    <MenuRoundedIcon/>
-                </MobileBtn>
+            <BurguerButton clicked={openMenu} handleClick={handleClick} />
+            <MenuContainer className={`${openMenu ? `active`:``}`}>
                 <DivFlex>
                     <Link to="/" className="link_btn" onClick={()=> setOpenMenu(!openMenu)}>Tenencias</Link>
                     <Link to="/addop" className="link_btn" onClick={()=> setOpenMenu(!openMenu)}>Crear Operacion</Link>
                     <Link to="/user" className="link_btn" onClick={()=> setOpenMenu(!openMenu)}>Usuario</Link>
                 </DivFlex>
             </MenuContainer>
-            : <MobileBtn onClick={()=> setOpenMenu(!openMenu)}>
-                <MenuRoundedIcon/>
-            </MobileBtn>}
         </>
     );
 };
 
-const MobileBtn = styled.button`
-    margin: 0.1em;
-    padding: 0.3em 0.5em;
-    position: fixed;
-    border: none;
-    border-radius: 3em;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    background-color: ${tertiaryColor};
-    transition: all .4s ease;
-    &:hover{
-        background-color: ${tertiaryHoverColor};
-        color: black;
-    }
-    @media(min-width: 768px){
-        display: none;
-    }
-`;
-
 const MenuContainer = styled.div`
     position: fixed;
     top: 0vh;
-    left: 0;
-    margin: 3em 0em;
+    left: -110vw;
+    margin: 0em 0em;
     padding: 0em 0em;
-
-    background-color: white;
-
-    border: 1px solid black;
-    border-radius: 4px;
-
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    
-    width: 100vw;
-    // z-index: 1;
+    transition: all 0.5s ease;
+    background-color: black;
+    background-color: ${primaryColor};
+    z-index: 1; 
+    &.active{
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 0 0 80% 0;
+    }
 `;
 
 const DivFlex = styled.div`
     display: flex;
     flex-direction: column;
-    margin: 0em;
-    padding: 0em 0em 0em 0.7em;
-    transition: all 0.9s ease;
+    margin: 3.5em 0em 0em 0em;
+    padding: 0em 0em 0em 1em;
     *{
         text-decoration: none;
-        color: black;
+        color: white;
+        padding: 1em 0em 0em 0em;
     }
 `;
