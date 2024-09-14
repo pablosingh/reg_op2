@@ -18,6 +18,9 @@ function BurguerButton(props) {
 export default BurguerButton;
 
 const Burguer = styled.div`
+  @media(min-width: 768px){
+    display: none;
+  }
   z-index: 2;
   position: fixed;
   margin: 0.5em 0em 0em 0.5em;
