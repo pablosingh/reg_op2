@@ -1,5 +1,6 @@
 export const LOAD_HOLD_FROM_DB = 'LOAD_HOLD_FROM_DB';
 export const LOAD_USER_ID = 'LOAD_USER_ID';
+export const LOAD_TOTAL_INVESTED_CAPITAL = 'LOAD_TOTAL_INVESTED_CAPITAL';
 
 // function actualPrice
 // apiURL = `https://www.binance.us/api/v3/ticker/price?symbol=btcusdt`;
@@ -38,6 +39,7 @@ export function loadHoldingsFromDB (userId) {
                                 })
                                 // .then( () => console.log(holdingsToSend) ) 
                                 .then( () => dispatch({ type: LOAD_HOLD_FROM_DB, payload: holdingsToSend }))
+                                .then( () => dispatch({ type: LOAD_TOTAL_INVESTED_CAPITAL, payload: null }) )
                         } )
                 })
                 .catch( err => console.error(err) );
@@ -78,3 +80,9 @@ export function loadUserId ({email, name}) {
         }
     };
 };
+
+// export function totalInvestedCapitalFn(){
+//     return {
+
+//     }
+// };

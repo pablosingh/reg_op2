@@ -4,7 +4,7 @@ import CardHolding from "./CardHolding";
 
 export default function Holding() {
     const hol = useSelector( state => state?.holdings.holdings );
-    const state = useSelector( state => state?.holdings.holdings );
+    const state = useSelector( state => state );
     return (
         <Container>
             {/* <Btn onClick={()=> console.log(state)}>Estado</Btn> */}
