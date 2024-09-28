@@ -8,6 +8,14 @@ export const LOAD_TOTAL_INVESTED_CAPITAL = 'LOAD_TOTAL_INVESTED_CAPITAL';
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
+export function calculateTotalInvestedCapital(arrayHoldings){
+    return arrayHoldings.reduce((acumulador, elemento) => {
+        acumulador += elemento.total;
+        // console.log(elemento);
+        return acumulador;
+    }, 0);
+};
+
 export function loadHoldingsFromDB (userId) {
     return async function (dispatch) {
         var holdingsToSend = [];
@@ -37,15 +45,17 @@ export function loadHoldingsFromDB (userId) {
                                         }
                                     });
                                 })
-                                // .then( () => console.log(holdingsToSend) ) 
+                                // .then( () => console.log(holdingsToSend) )
                                 .then( () => dispatch({ type: LOAD_HOLD_FROM_DB, payload: holdingsToSend }))
-                                .then( () => dispatch({ type: LOAD_TOTAL_INVESTED_CAPITAL, payload: null }) )
+                                .then( () => dispatch({ type: LOAD_TOTAL_INVESTED_CAPITAL, payload: calculateTotalInvestedCapital(holdingsToSend) }) )
                         } )
                 })
                 .catch( err => console.error(err) );
         } catch (error) {
             console.error(error);
-        }
+        }finally{
+            dispatch({ type: LOAD_TOTAL_INVESTED_CAPITAL, payload: null });
+        };
     };
 };
 
@@ -80,9 +90,3 @@ export function loadUserId ({email, name}) {
         }
     };
 };
-
-// export function totalInvestedCapitalFn(){
-//     return {
-
-//     }
-// };

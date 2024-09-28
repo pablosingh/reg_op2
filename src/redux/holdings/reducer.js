@@ -22,11 +22,10 @@ export const holdings = ( state = initialState, action ) => {
                 userId: action.payload,
             };
         case LOAD_TOTAL_INVESTED_CAPITAL:
-            // let sumaTotal = arreglo.reduce((acumulador, elemento) => acumulador + elemento.valor, 0);
             return {
                 ...state,
-                totalInvestedCapital: state?.holdings.reduce((acumulador, elemento) => acumulador + elemento.valor, 0)
-            }
+                totalInvestedCapital: action.payload,
+            };
         default: return state;
     };
 };
