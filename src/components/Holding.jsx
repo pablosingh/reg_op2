@@ -2,18 +2,20 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import CardHolding from "./CardHolding";
 import { LOAD_TOTAL_INVESTED_CAPITAL } from '../redux/holdings/actions';
-import { useDispatch } from "react-redux";
+import Total from './Total';
+// import { useDispatch } from "react-redux";
 
 export default function Holding() {
     const hol = useSelector( state => state?.holdings.holdings );
     const state = useSelector( state => state );
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     return (
         <Container>
-            <Btn onClick={()=> console.log(state)}>Estado</Btn>
-            <Btn onClick={()=> dispatch({ type: LOAD_TOTAL_INVESTED_CAPITAL, payload: null })}>calculate</Btn>
+            {/* <Btn onClick={()=> console.log(state)}>Estado</Btn> */}
+            {/* <Btn onClick={()=> dispatch({ type: LOAD_TOTAL_INVESTED_CAPITAL, payload: null })}>calculate</Btn> */}
             {/* <Btn onClick={()=> console.log(process.env.REACT_APP_API_URL)}>URL</Btn> */}
             {hol && hol.map( t => <CardHolding ticker={t} key={t.id}/> )}
+            <Total/>
         </Container>
     );
 };
