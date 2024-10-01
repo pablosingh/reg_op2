@@ -11,9 +11,15 @@ export default function Total() {
     <Container>
       <Sector>
         <Item>
-          Total 
+          Total Inicial
           <SubItem>
-            $ {state?.holdings.totalActualPrice}
+            $ {(state?.holdings.totalInvestedCapital)?.toFixed(2)}
+          </SubItem>
+        </Item>
+        <Item>
+          Total de Ganancias 
+          <SubItem>
+            $ {(state?.holdings.totalProfits)?.toFixed(2)}
           </SubItem>
         </Item>
       </Sector>

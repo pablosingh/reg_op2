@@ -62,7 +62,7 @@ export default function CardHolding(props) {
                     <SubItem>{amount} {ticker} x ${price?.toFixed(2)}</SubItem>
                 </Item>
                 <Item>
-                    <label>Total </label>
+                    <label>Capital Inicial </label>
                     <SubItem>${total?.toFixed(2)}</SubItem>
                 </Item>
                 { editDisabled ? 
@@ -90,20 +90,17 @@ export default function CardHolding(props) {
                     <SubItem>${actualPrice?.toFixed(2)}</SubItem>
                 </Item>
                 <Item>
+                    <label>Capital Final</label>
+                    <SubItem>${(amount*actualPrice?.toFixed(2)).toFixed(2)}</SubItem>
+                </Item>
+                <Item>
                     <label>Ganancias </label>
                     <SubItem>${profits?.toFixed(2)}</SubItem>
                 </Item>
-                {/* <Button variant="contained" 
-                    color="primary" endIcon={<ArrowDownwardIcon />}
-                    onClick={()=> setShowOps(!showOps)}
-                    style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center', // Centra el contenido horizontalmente
-                        textAlign: 'center',      // Alinea el texto en el centro
-                      }}
-                    className="myButton">
-                </Button> */}
+                <Item>
+                    <label>% Portafolio </label>
+                    <SubItem>%{((amount*actualPrice*100)/(state?.holdings.totalActualPrice)).toFixed(2)}</SubItem>
+                </Item>
                 <button className="myButton"
                     onClick={()=> setShowOps(!showOps)}>
                     <ArrowDownwardIcon />

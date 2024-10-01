@@ -2,6 +2,7 @@ export const LOAD_HOLD_FROM_DB = 'LOAD_HOLD_FROM_DB';
 export const LOAD_USER_ID = 'LOAD_USER_ID';
 export const LOAD_TOTAL_INVESTED_CAPITAL = 'LOAD_TOTAL_INVESTED_CAPITAL';
 export const LOAD_TOTAL_ACTUAL_PRICE = 'LOAD_TOTAL_ACTUAL_PRICE';
+export const LOAD_TOTAL_PROFITS = 'LOAD_TOTAL_PROFITS';
 
 // function actualPrice
 // apiURL = `https://www.binance.us/api/v3/ticker/price?symbol=btcusdt`;
@@ -14,8 +15,13 @@ export function calculateTotalInvestedCapital(arrayHoldings){
 };
 
 export function calculateTotalActualPrice(arrayHoldings){
-    return arrayHoldings.reduce( (acumulador, elemento) => acumulador + elemento.actualPrice, 0 );
+    return arrayHoldings.reduce( (acumulador, elemento) => acumulador + (elemento.actualPrice*elemento.amount), 0 );
 };
+
+export function calculateTotalProfits(arrayHoldings){
+    return arrayHoldings.reduce( (acumulador, elemento) => acumulador + (elemento.profits), 0 );
+};
+
 
 export function loadHoldingsFromDB (userId) {
     return async function (dispatch) {
@@ -50,6 +56,7 @@ export function loadHoldingsFromDB (userId) {
                                 .then( () => dispatch({ type: LOAD_HOLD_FROM_DB, payload: holdingsToSend }))
                                 .then( () => dispatch({ type: LOAD_TOTAL_INVESTED_CAPITAL, payload: calculateTotalInvestedCapital(holdingsToSend) }) )
                                 .then( () => dispatch({ type: LOAD_TOTAL_ACTUAL_PRICE, payload: calculateTotalActualPrice(holdingsToSend) }) )
+                                .then( () => dispatch({ type: LOAD_TOTAL_PROFITS, payload: calculateTotalProfits(holdingsToSend) }) )
                         } )
                 })
                 .catch( err => console.error(err) );
