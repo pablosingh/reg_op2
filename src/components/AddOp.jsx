@@ -5,6 +5,7 @@ import { loadHoldingsFromDB } from '../redux/holdings/actions';
 import CreateDate from './CreateDate';
 import BuySellComponent from './BuySellComponent';
 import { secondaryColor, tertiaryColor, tertiaryHoverColor } from "../styles/colors";
+import Modal from "./Modal";
 
 export default function AddOp () {
     const initialData = {
@@ -26,6 +27,9 @@ export default function AddOp () {
     const [ data, setData ] = useState(initialData);
     const [ buy, setBuy ] = useState(true);
     const [ myDate, setMyDate ] = useState(initialDate);
+    const [ showModal, setShowModal ] = useState(false);
+    const openModal = () => setShowModal(true);
+    const closeModal = () => setShowModal(false);
     const dispatch = useDispatch();
     const state = useSelector( state => state );
     const changing = e => {
@@ -74,10 +78,9 @@ export default function AddOp () {
         console.log(toSend);
         addOpsToDB(toSend);
         setData(initialData);
+        openModal();
+        setTimeout( closeModal, 1000 );
     };
-    // useEffect( ()=> {
-    //     console.log("Add Op");
-    // }, []);
     return(
         <Container>
             <SubContainer>
@@ -114,6 +117,7 @@ export default function AddOp () {
                     <Btn onClick={()=> console.log(buy)}>buy</Btn> */}
                 </Sector>
             </SubContainer>
+            <Modal isOpen={showModal} onClose={closeModal} children={"Exito"}/>
         </Container>
     );
 };
