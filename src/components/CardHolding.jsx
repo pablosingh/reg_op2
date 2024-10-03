@@ -59,7 +59,7 @@ export default function CardHolding(props) {
                 </Item>
                 <Item>
                     <label>{ticker} </label>
-                    <SubItem>{amount} {ticker} x ${price?.toFixed(2)}</SubItem>
+                    <SubItem>{amount?.toFixed(2)} {ticker} x ${price?.toFixed(2)}</SubItem>
                 </Item>
                 <Item>
                     <label>Capital Inicial </label>
