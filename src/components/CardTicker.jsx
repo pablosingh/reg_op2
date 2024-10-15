@@ -153,7 +153,3 @@ const Btn = styled.button`
         color: black;
     }
 `;
-
-// const myLabel = styled.label`
-
-// `;

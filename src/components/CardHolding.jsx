@@ -59,11 +59,27 @@ export default function CardHolding(props) {
                 </Item>
                 <Item>
                     <label>{ticker} </label>
-                    <SubItem>{amount?.toFixed(2)} {ticker} x ${price?.toFixed(2)}</SubItem>
+                    <SubItem>{amount?.toFixed(2)}</SubItem>
                 </Item>
                 <Item>
-                    <label>Capital Inicial </label>
-                    <SubItem>${total?.toFixed(2)}</SubItem>
+                    <label>Precio Inicial</label>
+                    <SubItem>${price?.toFixed(2)}</SubItem>
+                    <label>Precio Final</label>
+                    <SubItem>${actualPrice?.toFixed(2)}</SubItem>
+                </Item>
+                <Item>
+                    <label>Capital Inicial</label>
+                    <SubItem>${(amount*price)?.toFixed(2)}</SubItem>
+                    <label>Capital Final</label>
+                    <SubItem>${(amount*actualPrice)?.toFixed(2)}</SubItem>
+                </Item>
+                <Item>
+                    <label>Ganancias </label>
+                    <SubItem>${profits?.toFixed(2)}</SubItem>
+                </Item>
+                <Item>
+                    <label>% Portafolio </label>
+                    <SubItem>% {((amount*actualPrice*100)/(state?.holdings.totalActualPrice)).toFixed(2)}</SubItem>
                 </Item>
                 { editDisabled ? 
                     <Item><label>Comentarios
@@ -85,22 +101,6 @@ export default function CardHolding(props) {
                         onChange={editComment}/>
                     </Item>
                 }
-                <Item>
-                    <label>Precio Actual</label>
-                    <SubItem>${actualPrice?.toFixed(2)}</SubItem>
-                </Item>
-                <Item>
-                    <label>Capital Final</label>
-                    <SubItem>${(amount*actualPrice?.toFixed(2)).toFixed(2)}</SubItem>
-                </Item>
-                <Item>
-                    <label>Ganancias </label>
-                    <SubItem>${profits?.toFixed(2)}</SubItem>
-                </Item>
-                <Item>
-                    <label>% Portafolio </label>
-                    <SubItem>%{((amount*actualPrice*100)/(state?.holdings.totalActualPrice)).toFixed(2)}</SubItem>
-                </Item>
                 <button className="myButton"
                     onClick={()=> setShowOps(!showOps)}>
                     <ArrowDownwardIcon />
@@ -170,7 +170,7 @@ const Item = styled.div`
     flex-wrap: wrap;
     background-color: ${ItemHoldingColor};
     margin: 0.1em;
-    padding: 0.1em;
+    padding: 0.4em 0.2em;
     border-radius: 0.5em;
     // justify-content: flex-start;
     justify-content: center;

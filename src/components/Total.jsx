@@ -73,7 +73,7 @@ const Item = styled.div`
     flex-wrap: wrap;
     background-color: ${ItemHoldingColor};
     margin: 0.1em;
-    padding: 0.1em;
+    padding: 0.4em 0.2em;
     border-radius: 0.5em;
     // justify-content: flex-start;
     justify-content: center;

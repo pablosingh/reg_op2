@@ -28,6 +28,7 @@
     "node-fetch": "^3.3.2",
     "pg": "^8.12.0",
     "pg-hstore": "^2.3.4",
+    "reg_op2_api": "file:",
     "sequelize": "^6.37.3"
   },
   "devDependencies": {
