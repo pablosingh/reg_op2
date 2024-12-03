@@ -2,31 +2,51 @@ import styled from "styled-components";
 import CardTicker from "./CardTicker";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loadHoldingsFromDB } from '../redux/holdings/actions';
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
-import { ItemHoldingColor, primaryColor, 
-    secondaryColor, tertiaryColor, tertiaryHoverColor } from "../styles/colors";
+import { loadHoldingsFromDB } from "../redux/holdings/actions";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import BorderColorOutlinedIcon from "@mui/icons-material/BorderColorOutlined";
+import {
+    ItemHoldingColor,
+    primaryColor,
+    secondaryColor,
+    tertiaryColor,
+    tertiaryHoverColor,
+} from "../styles/colors";
 
 export default function CardHolding(props) {
-    const { id, date, ticker, amount, price, total, comment, actualPrice, profits, Operations } = props.ticker;
+    const {
+        id,
+        date,
+        ticker,
+        amount,
+        price,
+        total,
+        comment,
+        actualPrice,
+        profits,
+        Operations,
+    } = props.ticker;
+    //   const percent = (
+    //     (amount * actualPrice * 100) /
+    //     state?.holdings.totalActualPrice
+    //   ).toFixed(2);
     const [showOps, setShowOps] = useState(false);
     const dispatch = useDispatch();
-    const state = useSelector(state => state);
-    const [ editDisabled, setEditDisabled ] = useState(true);
-    const [ commentState, setCommentState ] = useState(comment+"");
+    const state = useSelector((state) => state);
+    const [editDisabled, setEditDisabled] = useState(true);
+    const [commentState, setCommentState] = useState(comment + "");
     const dateTicker = new Date(date);
-    const formattedDate = dateTicker.toLocaleDateString('es-ES', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
+    const formattedDate = dateTicker.toLocaleDateString("es-ES", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
     });
-    
-    const editComment = e => {
+
+    const editComment = (e) => {
         setCommentState(e.target.value);
         e.stopPropagation();
     };
-    const updatingComment = async e => {
+    const updatingComment = async (e) => {
         e.stopPropagation();
         setEditDisabled(!editDisabled);
         console.log(commentState);
@@ -34,26 +54,26 @@ export default function CardHolding(props) {
         const apiUrl = process.env.REACT_APP_API_URL;
         try {
             await fetch(`${apiUrl}holdings`, {
-                method: 'PUT',
+                method: "PUT",
                 headers: {
-                  'Content-Type': 'application/json',
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
                     id,
-                    comment: commentState
+                    comment: commentState,
                 }),
-              })
-                .then(js => js.json())
+            })
+                .then((js) => js.json())
                 // .then(res => console.log(res))
-                .then( () => dispatch(loadHoldingsFromDB(state.holdings.userId)) )
-                .catch(e => console.error(e));
+                .then(() => dispatch(loadHoldingsFromDB(state.holdings.userId)))
+                .catch((e) => console.error(e));
         } catch (err) {
             console.error(err);
-        };
+        }
     };
     return (
         <Container>
-            <Sector onClick={()=> setShowOps(!showOps)}>
+            <Sector onClick={() => setShowOps(!showOps)}>
                 <Item>
                     <SubItem>{formattedDate}</SubItem>
                 </Item>
@@ -69,9 +89,9 @@ export default function CardHolding(props) {
                 </Item>
                 <Item>
                     <label>Capital Inicial</label>
-                    <SubItem>${(amount*price)?.toFixed(2)}</SubItem>
+                    <SubItem>${(amount * price)?.toFixed(2)}</SubItem>
                     <label>Capital Final</label>
-                    <SubItem>${(amount*actualPrice)?.toFixed(2)}</SubItem>
+                    <SubItem>${(amount * actualPrice)?.toFixed(2)}</SubItem>
                 </Item>
                 <Item>
                     <label>Ganancias </label>
@@ -79,42 +99,81 @@ export default function CardHolding(props) {
                 </Item>
                 <Item>
                     <label>% Portafolio </label>
-                    <SubItem>% {((amount*actualPrice*100)/(state?.holdings.totalActualPrice)).toFixed(2)}</SubItem>
+                    {/* <SubItem>
+                        %{" "}
+                        {(
+                            (amount * actualPrice * 100) /
+                            state?.holdings.totalActualPrice
+                        ).toFixed(2)}
+                    </SubItem> */}
+                    <SubItem
+                        className={`${
+                            (amount * actualPrice * 100) /
+                                state?.holdings.totalActualPrice >
+                            0
+                                ? "green"
+                                : "red"
+                        }`}
+                    >
+                        %{" "}
+                        {(
+                            (amount * actualPrice * 100) /
+                            state?.holdings.totalActualPrice
+                        ).toFixed(2)}
+                    </SubItem>
                 </Item>
-                { editDisabled ? 
-                    <Item><label>Comentarios
-                        <Btn onClick={ e => {
-                            e.stopPropagation();
-                            setEditDisabled(!editDisabled);
-                            }}>
-                            <BorderColorOutlinedIcon sx={{ fontSize: 12 }}/>
-                        </Btn>
-                    </label>
+                {editDisabled ? (
+                    <Item>
+                        <label>
+                            Comentarios
+                            <Btn
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    setEditDisabled(!editDisabled);
+                                }}
+                            >
+                                <BorderColorOutlinedIcon
+                                    sx={{ fontSize: 12 }}
+                                />
+                            </Btn>
+                        </label>
                         <SubItem>{comment}</SubItem>
                     </Item>
-                : 
-                    <Item><label>Comentarios
-                        <Btn onClick={updatingComment}>Salvar</Btn>
+                ) : (
+                    <Item>
+                        <label>
+                            Comentarios
+                            <Btn onClick={updatingComment}>Salvar</Btn>
                         </label>
-                        <InputData type="text" name="comment" value={commentState} disabled={editDisabled}
-                        onClick={e => e.stopPropagation() }
-                        onChange={editComment}/>
+                        <InputData
+                            type="text"
+                            name="comment"
+                            value={commentState}
+                            disabled={editDisabled}
+                            onClick={(e) => e.stopPropagation()}
+                            onChange={editComment}
+                        />
                     </Item>
-                }
-                <button className="myButton"
-                    onClick={()=> setShowOps(!showOps)}>
+                )}
+                <button
+                    className="myButton"
+                    onClick={() => setShowOps(!showOps)}
+                >
                     <ArrowDownwardIcon />
                 </button>
             </Sector>
-            
-            { showOps ? 
+
+            {showOps ? (
                 <DivOps>
-                    { Operations && Operations.map( o => <CardTicker ticker={o} key={o.id} />) }
+                    {Operations &&
+                        Operations.map((o) => (
+                            <CardTicker ticker={o} key={o.id} />
+                        ))}
                 </DivOps>
-            : null }
+            ) : null}
         </Container>
     );
-};
+}
 
 const Container = styled.div`
     display: flex;
@@ -127,7 +186,7 @@ const Container = styled.div`
     margin: 0.5em 0.5em 0em 0.5em;
     padding: 1em 2em;
     border-radius: 5em;
-    .myButton{
+    .myButton {
         color: white;
         margin: 0em 0.3em;
         padding: 0.1em 0.5em;
@@ -137,8 +196,8 @@ const Container = styled.div`
         border-radius: 5em;
         border: none;
         background-color: ${tertiaryColor};
-        transition: all .4s ease;
-        &:hover{
+        transition: all 0.4s ease;
+        &:hover {
             background-color: ${tertiaryHoverColor};
             color: black;
         }
@@ -175,6 +234,14 @@ const Item = styled.div`
     // justify-content: flex-start;
     justify-content: center;
     // align-items: center;
+    .red {
+        font-weight: bold;
+        color: red;
+    }
+    .green {
+        font-weight: bold;
+        color: green;
+    }
 `;
 const SubItem = styled.div`
     color: black;
@@ -194,8 +261,8 @@ const Btn = styled.button`
     border-radius: 1em;
     padding: 0.2em 1em;
     margin: 0.3em;
-    transition: all .4s ease;
-    &:hover{
+    transition: all 0.4s ease;
+    &:hover {
         background-color: ${tertiaryHoverColor};
         color: black;
     }
